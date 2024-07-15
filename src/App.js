@@ -6,8 +6,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CalendarPage />} />
-        <Route path="/analyze" element={<AnalyzePage />} />
+        <Route>
+          <Route path="/" element={<CalendarPage />} />
+          <Route path="/analyze" element={<AnalyzePage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
