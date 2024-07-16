@@ -84,8 +84,8 @@ const BnB = styled.nav`
   box-sizing: border-box;
   padding: 16px 60px;
   // box-shadow: 0px -2px 10px 0px #00000026;
-  -webkit-box-shadow: 0px -2px 4.5px #00000026;
-  -moz-box-shadow: 0px -4px 3px #00000026;
+  -webkit-box-shadow: 0px -0.5px 1.8px #00000026;
+  -moz-box-shadow: 0px -2px 4.5px #00000026;
 `;
 
 const BnbItem = styled(Link)`
