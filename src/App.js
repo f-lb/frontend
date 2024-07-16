@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AnalyzePage, CalendarPage } from "./pages";
+import { AnalyzePage, CalendarPage, ProfilePage, RecordPage } from "./pages";
 import { BnbLayout, RootLayout } from "./layouts";
 
 function App() {
@@ -8,10 +8,12 @@ function App() {
     <RootLayout>
       <BrowserRouter>
         <Routes>
-            <Route element={<BnbLayout />}>
-              <Route path="/" element={<CalendarPage />} />
-              <Route path="/analyze" element={<AnalyzePage />} />
-            </Route>
+          <Route element={<BnbLayout />}>
+            <Route path="/" element={<CalendarPage />} />
+            <Route path="/analyze" element={<AnalyzePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/record" element={<RecordPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </RootLayout>
