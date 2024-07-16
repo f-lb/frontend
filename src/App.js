@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AnalyzePage, CalendarPage } from "./pages";
-import { BnbLayout } from "./layout";
+import { BnbLayout } from "./layouts";
 
 function App() {
   return (
