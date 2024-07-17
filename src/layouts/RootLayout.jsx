@@ -6,7 +6,7 @@ export default function RootLayout({ children }) {
 }
 
 const Container = styled.div`
-  background-color: ${COLORS.WHITE};
+  background-color: #f3f3f3
   max-width: 375px;
   margin: 0 auto;
   min-height: 100vh;

@@ -14,11 +14,15 @@ li {
 }
 
 body {
-  background-color: #f5f5f7;
+  background-color: #f3f3f3;
 }
 
 button {
   border: none;
   background-color: inherit;
   cursor: pointer;
+}
+
+img {
+  vertical-align: top;
 }
