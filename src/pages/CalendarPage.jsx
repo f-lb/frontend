@@ -55,6 +55,16 @@ export default function CalendarPage() {
         <Date>2</Date>
         <Date>3</Date>
       </Calendar>
+      <RecordEmpty>
+        <span>2024-07-17</span>
+        <Guide>
+          <p>
+            반가워요. <br />
+            오늘의 빈칸을 채워볼까요?
+          </p>
+          <button>기록하기</button>
+        </Guide>
+      </RecordEmpty>
     </Container>
   );
 }
@@ -136,7 +146,7 @@ const Calendar = styled.ul`
   padding: 24px 10px;
   text-align: center;
   gap: 10px;
-  row-gap: 18px;
+  row-gap: 16px;
   border-bottom: 8px solid #d9d9d9;
   background-color: #fff;
 `;
@@ -156,4 +166,63 @@ const Date = styled.li`
   justify-content: center;
   border-radius: 12px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+`;
+
+const RecordEmpty = styled.div`
+  padding: 10px 10px 100px;
+  span {
+    color: #8a8a8a;
+
+    /* caption/Md */
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  button {
+    color: var(--gray-800Font, #363636);
+    text-align: center;
+    /* subtitle/Sm */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 18.2px */
+    letter-spacing: -0.28px;
+
+    border-radius: 8px;
+    border: 1px solid var(--gray-400Neutral, #c5c5c5);
+    background: var(--sad_primary-500, #a4bfed);
+
+    /* calendarItemDropShadow */
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    width: 160px;
+    padding: 7px 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+`;
+
+const Guide = styled.div`
+  width: fit-content;
+  text-align: center;
+  margin: 20px auto 0;
+
+  color: #404040;
+  p {
+    text-align: center;
+    /* title/Sm */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%; /* 19.2px */
+    letter-spacing: -0.32px;
+    margin-bottom: 16px;
+  }
 `;
