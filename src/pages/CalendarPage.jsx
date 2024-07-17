@@ -152,6 +152,7 @@ const Calendar = styled.ul`
 `;
 
 const Date = styled.li`
+  cursor: pointer;
   text-align: center;
   color: #363636;
   font-family: Pretendard;
