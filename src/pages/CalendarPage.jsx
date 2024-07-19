@@ -11,13 +11,15 @@ const mockDatas = [
     outOfDate: true,
     color: "#c5d6f5",
     future: false,
+    today: false,
   },
   {
     id: 1,
     date: 31,
-    outOfDate: false,
+    outOfDate: true,
     color: "#ffe976",
     future: false,
+    today: false,
   },
   {
     id: 2,
@@ -25,6 +27,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 3,
@@ -32,6 +35,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 4,
@@ -39,6 +43,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 5,
@@ -46,6 +51,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#c5d6f5",
     future: false,
+    today: false,
   },
   {
     id: 6,
@@ -53,6 +59,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 7,
@@ -60,6 +67,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 8,
@@ -67,6 +75,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 9,
@@ -74,6 +83,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#c5d6f5",
     future: false,
+    today: false,
   },
   {
     id: 10,
@@ -81,6 +91,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#ffe976",
     future: false,
+    today: false,
   },
   {
     id: 11,
@@ -88,6 +99,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 12,
@@ -95,6 +107,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#c5d6f5",
     future: false,
+    today: false,
   },
   {
     id: 13,
@@ -102,6 +115,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 14,
@@ -109,6 +123,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 15,
@@ -116,6 +131,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#ffe976",
     future: false,
+    today: false,
   },
   {
     id: 16,
@@ -123,6 +139,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#ffe976",
     future: false,
+    today: false,
   },
   {
     id: 17,
@@ -130,6 +147,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#ffbbec",
     future: false,
+    today: false,
   },
   {
     id: 18,
@@ -137,6 +155,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#ffbbec",
     future: false,
+    today: false,
   },
   {
     id: 19,
@@ -144,6 +163,7 @@ const mockDatas = [
     outOfDate: false,
     color: "#b8eda5",
     future: false,
+    today: true,
   },
   {
     id: 20,
@@ -151,6 +171,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: false,
+    today: false,
   },
   {
     id: 21,
@@ -158,6 +179,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 22,
@@ -172,6 +194,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 24,
@@ -179,6 +202,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 25,
@@ -186,6 +210,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 26,
@@ -193,6 +218,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 27,
@@ -200,6 +226,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 28,
@@ -207,6 +234,7 @@ const mockDatas = [
     outOfDate: true,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 29,
@@ -214,6 +242,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 30,
@@ -221,6 +250,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 31,
@@ -228,6 +258,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 32,
@@ -235,6 +266,7 @@ const mockDatas = [
     outOfDate: false,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 33,
@@ -242,6 +274,7 @@ const mockDatas = [
     outOfDate: true,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 34,
@@ -249,6 +282,7 @@ const mockDatas = [
     outOfDate: true,
     color: null,
     future: true,
+    today: false,
   },
   {
     id: 35,
@@ -256,6 +290,7 @@ const mockDatas = [
     outOfDate: true,
     color: null,
     future: true,
+    today: false,
   },
 ];
 
@@ -301,16 +336,16 @@ export default function CalendarPage() {
       </WeeksBar>
       <Calendar>
         {mockDatas.map((data) => (
-          <>
+          <li style={{ position: "relative" }}>
+            {data.today && <StatusBar />}
             <Date
-              key={data.id}
-              $color={data.color}
               $isOutOfDate={data.outOfDate}
               $isFuture={data.future}
+              $color={data.color}
             >
               {data.date}
             </Date>
-          </>
+          </li>
         ))}
       </Calendar>
       <RecordEmpty>
@@ -485,4 +520,19 @@ const Guide = styled.div`
     letter-spacing: -0.32px;
     margin-bottom: 16px;
   }
+`;
+
+const StatusBar = styled.div`
+  width: 22px;
+  height: 4px;
+  background: #ffdb72;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -8px;
+`;
+
+const DateBox = styled.div`
+  margin: 0 auto;
 `;
