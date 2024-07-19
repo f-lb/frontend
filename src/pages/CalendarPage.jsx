@@ -2,8 +2,262 @@ import styled from "styled-components";
 import BellIcon from "../assets/bell.svg";
 import ArrowIcon from "../assets/arrow.svg";
 import CalendarSIcon01 from "../assets/calendar_s01.svg";
-import CalendarSIcon02 from "../assets/calendar_s02.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
+
+const mockDatas = [
+  {
+    id: 0,
+    date: 30,
+    outOfDate: true,
+    color: "#c5d6f5",
+    future: false,
+  },
+  {
+    id: 1,
+    date: 31,
+    outOfDate: false,
+    color: "#ffe976",
+    future: false,
+  },
+  {
+    id: 2,
+    date: 1,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 3,
+    date: 2,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 4,
+    date: 3,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 5,
+    date: 4,
+    outOfDate: false,
+    color: "#c5d6f5",
+    future: false,
+  },
+  {
+    id: 6,
+    date: 5,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 7,
+    date: 6,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 8,
+    date: 7,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 9,
+    date: 8,
+    outOfDate: false,
+    color: "#c5d6f5",
+    future: false,
+  },
+  {
+    id: 10,
+    date: 9,
+    outOfDate: false,
+    color: "#ffe976",
+    future: false,
+  },
+  {
+    id: 11,
+    date: 10,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 12,
+    date: 11,
+    outOfDate: false,
+    color: "#c5d6f5",
+    future: false,
+  },
+  {
+    id: 13,
+    date: 12,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 14,
+    date: 13,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 15,
+    date: 14,
+    outOfDate: false,
+    color: "#ffe976",
+    future: false,
+  },
+  {
+    id: 16,
+    date: 15,
+    outOfDate: false,
+    color: "#ffe976",
+    future: false,
+  },
+  {
+    id: 17,
+    date: 16,
+    outOfDate: false,
+    color: "#ffbbec",
+    future: false,
+  },
+  {
+    id: 18,
+    date: 17,
+    outOfDate: false,
+    color: "#ffbbec",
+    future: false,
+  },
+  {
+    id: 19,
+    date: 18,
+    outOfDate: false,
+    color: "#b8eda5",
+    future: false,
+  },
+  {
+    id: 20,
+    date: 19,
+    outOfDate: false,
+    color: null,
+    future: false,
+  },
+  {
+    id: 21,
+    date: 20,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 22,
+    date: 21,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 23,
+    date: 22,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 24,
+    date: 23,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 25,
+    date: 24,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 26,
+    date: 25,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 27,
+    date: 26,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 28,
+    date: 27,
+    outOfDate: true,
+    color: null,
+    future: true,
+  },
+  {
+    id: 29,
+    date: 28,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 30,
+    date: 29,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 31,
+    date: 30,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 32,
+    date: 31,
+    outOfDate: false,
+    color: null,
+    future: true,
+  },
+  {
+    id: 33,
+    date: 1,
+    outOfDate: true,
+    color: null,
+    future: true,
+  },
+  {
+    id: 34,
+    date: 2,
+    outOfDate: true,
+    color: null,
+    future: true,
+  },
+  {
+    id: 35,
+    date: 3,
+    outOfDate: true,
+    color: null,
+    future: true,
+  },
+];
 
 export default function CalendarPage() {
   return (
@@ -46,14 +300,18 @@ export default function CalendarPage() {
         <li>토</li>
       </WeeksBar>
       <Calendar>
-        <Date>30</Date>
-        <Date>31</Date>
-        {new Array(31).fill(0).map((date, i) => (
-          <Date>{i}</Date>
+        {mockDatas.map((data) => (
+          <>
+            <Date
+              key={data.id}
+              $color={data.color}
+              $isOutOfDate={data.outOfDate}
+              $isFuture={data.future}
+            >
+              {data.date}
+            </Date>
+          </>
         ))}
-        <Date>1</Date>
-        <Date>2</Date>
-        <Date>3</Date>
       </Calendar>
       <RecordEmpty>
         <span>2024-07-17</span>
@@ -145,13 +403,14 @@ const Calendar = styled.ul`
   grid-template-columns: repeat(7, 1fr);
   padding: 24px 10px;
   text-align: center;
-  gap: 10px;
+  gap: 7px;
   row-gap: 16px;
   border-bottom: 8px solid #d9d9d9;
   background-color: #fff;
 `;
 
 const Date = styled.li`
+  cursor: pointer;
   text-align: center;
   color: #363636;
   font-family: Pretendard;
@@ -159,13 +418,14 @@ const Date = styled.li`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  background-color: #c5d6f5;
-  height: 44px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  background-color: ${({ $color }) => $color};
+  opacity: ${({ $isOutOfDate }) => ($isOutOfDate ? "0.42" : "1")};
+  border: ${({ $isFuture }) => ($isFuture ? "2px dashed #e0e0e0" : "")};
 `;
 
 const RecordEmpty = styled.div`
