@@ -3,6 +3,7 @@ import BellIcon from "../assets/bell.svg";
 import ArrowIcon from "../assets/arrow.svg";
 import CalendarSIcon01 from "../assets/calendar_s01.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
+import DairySummary from "../components/DairySummary";
 
 const mockDatas = [
   {
@@ -315,6 +316,9 @@ export default function CalendarPage() {
       </Calendar>
       <RecordEmpty>
         <span>2024-07-17</span>
+        {/* 날짜 선택시 일기 요약 보임 */}
+        {/* <DairySummary>
+        </DairySummary> */}
         <Guide>
           <p>
             반가워요. <br />
@@ -430,17 +434,6 @@ const Date = styled.li`
 
 const RecordEmpty = styled.div`
   padding: 10px 10px 100px;
-  span {
-    color: #8a8a8a;
-
-    /* caption/Md */
-    font-family: Pretendard;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-
   button {
     color: var(--gray-800Font, #363636);
     text-align: center;
@@ -471,7 +464,7 @@ const RecordEmpty = styled.div`
 const Guide = styled.div`
   width: fit-content;
   text-align: center;
-  margin: 20px auto 0;
+  margin: 30px auto 0;
 
   color: #404040;
   p {
