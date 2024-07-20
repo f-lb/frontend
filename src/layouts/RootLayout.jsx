@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { COLORS } from "../utils";
 
 export default function RootLayout({ children }) {
   return <Container>{children}</Container>;
