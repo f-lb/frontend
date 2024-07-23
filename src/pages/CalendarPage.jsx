@@ -5,6 +5,8 @@ import CalendarSIcon01 from "../assets/calendar_s01.svg";
 import CalendarSIcon02 from "../assets/calendar_s02.svg";
 import Filled_CalendarSIcon01 from "../assets/calendar_s01_filled.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
+import RecordIcon from "../assets/record.svg";
+
 import { useState } from "react";
 
 const mockDatas = [
@@ -376,7 +378,10 @@ export default function CalendarPage() {
             반가워요. <br />
             오늘의 빈칸을 채워볼까요?
           </p>
-          <button>기록하기</button>
+          <StyledButton>
+            기록하기
+            <Icon src={RecordIcon} alt="record icon" />
+          </StyledButton>
         </Guide>
       </RecordEmpty>
     </Container>
@@ -486,39 +491,10 @@ const RecordEmpty = styled.div`
   padding: 10px 10px 100px;
   span {
     color: #8a8a8a;
-
-    /* caption/Md */
     font-family: Pretendard;
     font-size: 12px;
-    font-style: normal;
     font-weight: 400;
     line-height: normal;
-  }
-
-  button {
-    color: var(--gray-800Font, #363636);
-    text-align: center;
-    /* subtitle/Sm */
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%; /* 18.2px */
-    letter-spacing: -0.28px;
-
-    border-radius: 8px;
-    border: 1px solid var(--gray-400Neutral, #c5c5c5);
-    background: var(--sad_primary-500, #a4bfed);
-
-    /* calendarItemDropShadow */
-    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-    display: flex;
-    width: 160px;
-    padding: 7px 8px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
   }
 `;
 
@@ -526,19 +502,36 @@ const Guide = styled.div`
   width: fit-content;
   text-align: center;
   margin: 20px auto 0;
-
   color: #404040;
   p {
     text-align: center;
-    /* title/Sm */
     font-family: Pretendard;
     font-size: 16px;
-    font-style: normal;
     font-weight: 600;
-    line-height: 120%; /* 19.2px */
-    letter-spacing: -0.32px;
     margin-bottom: 16px;
   }
+`;
+
+const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 7px 8px;
+  width: 160px;
+  color: #363636;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 8px;
+  border: 1px solid #c5c5c5;
+  background: #a4bfed;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+`;
+
+const Icon = styled.img`
+  width: 16px;
+  height: 16px;
 `;
 
 const StatusBar = styled.div`
