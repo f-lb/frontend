@@ -19,7 +19,7 @@ export default function BnbLayout() {
 
       <BnB>
         <BnbItem to="/">
-          {pathname !== "/" ? (
+          {pathname !== "/" && pathname !== "/weeklyMode" ? (
             <img src={CalendarIcon} alt="calendar icon" />
           ) : (
             <img

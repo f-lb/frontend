@@ -82,9 +82,9 @@ export default function WeeklyModeCalendarPage() {
               <br />
               오늘의 빈칸을 채워볼까요?
             </h2>
-            <p style={{ marginTop: "25px", width: "100%", textAlign: "right" }}>
+            <LinkToPostContainer>
               <LinkToPost>일기 작성하고 분석받기 {">"}</LinkToPost>
-            </p>
+            </LinkToPostContainer>
           </DiaryWrapper>
         </Diary>
       </DateWithDiary>
@@ -145,13 +145,29 @@ const DateAndDay = styled.div`
   flex-shrink: 0;
 `;
 
+const Diary = styled.div`
+  height: 100px;
+  padding: 10px 10px 0px 0;
+  flex-grow: 1;
+`;
+
 const DateWithDiary = styled.li`
   display: flex;
   gap: 20px;
 
+  &:first-child {
+    ${Diary} {
+      // margin-top: 10px;
+    }
+  }
+
   &:not(:first-child) {
     ${DateAndDay} {
       margin-top: -20px;
+    }
+
+    ${Diary} {
+      transform: translateY(-15%);
     }
   }
 `;
@@ -174,10 +190,7 @@ const Day = styled.div`
   padding-left: 20px;
   padding: 5px 0 5px 20px;
 `;
-const Diary = styled.div`
-  padding: 10px 10px 10px 0;
-  flex-grow: 1;
-`;
+
 const DiaryWrapper = styled.div`
   padding-bottom: 15px;
   h2 {
@@ -200,6 +213,11 @@ const DiaryWrapper = styled.div`
     text-align: justified;
     color: #363636;
     margin-bottom: 15px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 
   div {
@@ -238,4 +256,17 @@ const LinkToPost = styled(Link)`
   text-align: left;
 
   color: #363636;
+`;
+
+const LinkToPostContainer = styled.div`
+  display: flex !important;
+  justify-content: flex-end !important;
+  flex-grow: 1;
+  a {
+    margin-top: 20px;
+    margin-bottom: 0;
+    margin-tight: 20px;
+    text-align: right;
+  }
+  width: 100%;
 `;
