@@ -1,5 +1,8 @@
 export default function AnalyzePage() {
-  return <>
-    
-  </>;
+  return (
+    <>
+      Analyze page
+    </>
+  );
 }
+
