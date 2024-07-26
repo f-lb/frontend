@@ -4,6 +4,7 @@ import { AnalyzePage, CalendarPage, ProfilePage, RecordPage } from "./pages";
 import { BnbLayout, RootLayout } from "./layouts";
 import MontlyModeCalendarPage from "./components/MontlyModeCalendarPage";
 import WeeklyModeCalendarPage from "./components/WeeklyModeCalendarPage";
+import LoadingPage from "./pages/LoadingPage";
 
 function App() {
   return (
@@ -15,11 +16,11 @@ function App() {
               <Route index path="/" element={<MontlyModeCalendarPage />} />
               <Route path="/weeklyMode" element={<WeeklyModeCalendarPage />} />
             </Route>
-
             <Route path="/analyze" element={<AnalyzePage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/record" element={<RecordPage />} />
           </Route>
+          <Route path="/loading" element={<LoadingPage />} />
         </Routes>
       </BrowserRouter>
     </RootLayout>
