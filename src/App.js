@@ -5,6 +5,7 @@ import { BnbLayout, RootLayout } from "./layouts";
 import MontlyModeCalendarPage from "./components/MontlyModeCalendarPage";
 import WeeklyModeCalendarPage from "./components/WeeklyModeCalendarPage";
 import LoadingPage from "./pages/LoadingPage";
+import SummeryPage from "./pages/SummeryPage";  // SummeryPage 가져오기
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/record" element={<RecordPage />} />
           </Route>
           <Route path="/loading" element={<LoadingPage />} />
+          <Route path="/summary" element={<SummeryPage />} />  {/* SummeryPage 경로 추가 */}
         </Routes>
       </BrowserRouter>
     </RootLayout>
