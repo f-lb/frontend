@@ -5,6 +5,14 @@ import { BnbLayout, RootLayout } from "./layouts";
 import MontlyModeCalendarPage from "./components/MontlyModeCalendarPage";
 import WeeklyModeCalendarPage from "./components/WeeklyModeCalendarPage";
 import LoadingPage from "./pages/LoadingPage";
+import { lazy, Suspense } from "react";
+
+
+const TodayReportPageLazyed = lazy(async () => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(import("./pages/TodayReportPage")), 2000);
+  });
+});
 
 function App() {
   return (
@@ -20,8 +28,14 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/record" element={<RecordPage />} />
           </Route>
-          <Route path="/loading" element={<LoadingPage />} />
+
         </Routes>
+          <Suspense fallback={<LoadingPage/>}>
+            {/* <Route path="/loading" element={<LoadingPage />} /> */}
+            <Routes>
+              <Route path="/today-report" element={<TodayReportPageLazyed/>}/>
+            </Routes>
+          </Suspense>
       </BrowserRouter>
     </RootLayout>
   );
