@@ -36,7 +36,7 @@ export default function TodayReportPage() {
           노력이 분노를 완화하는 데 도움이 될 수 있습니다.
         </p>
 
-        <div>
+        <EmotionDistribution>
           <h2>오늘의 감정 분포도</h2>
           <ul>
             <li>
@@ -68,7 +68,7 @@ export default function TodayReportPage() {
               <div></div>
             </li>
           </ul>
-        </div>
+        </EmotionDistribution>
       </Main>
     </>
   );
@@ -119,4 +119,10 @@ const Main = styled.main`
     text-align: justified;
     margin-top: 10px;
   }
+`;
+
+const EmotionDistribution = styled.div`
+  background-color: #fff;
+  margin: 0 -15px;
+  border-bottom: 8px solid #eoeoeo;
 `;
