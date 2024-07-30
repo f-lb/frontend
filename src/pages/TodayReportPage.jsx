@@ -69,6 +69,10 @@ export default function TodayReportPage() {
             </li>
           </ul>
         </EmotionDistribution>
+
+        <div>
+          <h2>문장분석</h2>
+        </div>
       </Main>
     </>
   );
@@ -126,7 +130,6 @@ const Main = styled.main`
 const EmotionDistribution = styled.div`
   background-color: #fff;
   margin: 0 -15px;
-  border-bottom: 8px solid #e0e0e0;
 
   padding: 24px 16px 24px 16px;
 
