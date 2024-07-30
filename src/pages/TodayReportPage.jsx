@@ -105,6 +105,16 @@ export default function TodayReportPage() {
             모르겠다. 암튼 오늘의 일기 끝.
           </p>
         </SentenceAnalysis>
+
+        <Graph>
+          <Header>
+            <h3>30일간의 어휘 변화</h3>
+            <div>
+              <span>긍정적 단어</span>
+              <span>부정적단어</span>
+            </div>
+          </Header>
+        </Graph>
       </Main>
     </>
   );
@@ -222,5 +232,48 @@ const SentenceAnalysis = styled.div`
     margin: 0 20px;
     padding: 10px;
     border-radius: 12px;
+  }
+`;
+
+const Graph = styled.div`
+  background: #fff;
+  padding: 30px 0;
+  margin: 0 -15px;
+  padding: 20px;
+
+  ${Header} {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      span {
+        //styleName: caption/graySm;
+        font-family: Pretendard;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 13.13px;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        &:before {
+          content: " ";
+          display: block;
+          width: 15px;
+          height: 3px;
+          background: #ffdc72;
+        }
+
+        &:last-child {
+          &:before {
+            background: #ffb199;
+          }
+        }
+      }
+    }
   }
 `;
