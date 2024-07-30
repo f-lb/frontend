@@ -1,6 +1,6 @@
-import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import StickRegularFont from '../fonts/StickRegular.ttf';
+import React from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import StickRegularFont from "../fonts/StickRegular.ttf";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -18,9 +18,20 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-const WordAnalysisDashboard = ({ totalSentences, negativeSentences, positiveSentences, yesterdayNegativePercent, negativeVariance, positiveVariance }) => {
-  const negativePercent = ((negativeSentences / totalSentences) * 100).toFixed(1);
-  const positivePercent = ((positiveSentences / totalSentences) * 100).toFixed(1);
+const WordAnalysisDashboard = ({
+  totalSentences,
+  negativeSentences,
+  positiveSentences,
+  yesterdayNegativePercent,
+  negativeVariance,
+  positiveVariance,
+}) => {
+  const negativePercent = ((negativeSentences / totalSentences) * 100).toFixed(
+    1
+  );
+  const positivePercent = ((positiveSentences / totalSentences) * 100).toFixed(
+    1
+  );
 
   const renderVariance = (variance) => {
     if (variance === 0) {
@@ -45,17 +56,25 @@ const WordAnalysisDashboard = ({ totalSentences, negativeSentences, positiveSent
           <CellHeader>긍정 문장</CellHeader>
           <Cell>{totalSentences}</Cell>
           <Cell>
-            <NegativeValue>{negativePercent}% {renderVariance(negativeVariance)}</NegativeValue>
-            <SubText>{negativeSentences} / {totalSentences}</SubText>
+            <NegativeValue>
+              {negativePercent}% {renderVariance(negativeVariance)}
+            </NegativeValue>
+            <SubText>
+              {negativeSentences} / {totalSentences}
+            </SubText>
           </Cell>
           <Cell>
-            <PositiveValue>{positivePercent}% {renderVariance(positiveVariance)}</PositiveValue>
-            <SubText>{positiveSentences} / {totalSentences}</SubText>
+            <PositiveValue>
+              {positivePercent}% {renderVariance(positiveVariance)}
+            </PositiveValue>
+            <SubText>
+              {positiveSentences} / {totalSentences}
+            </SubText>
           </Cell>
         </Grid>
         <HorizontalLine />
-        <VerticalLine style={{ left: '33.33%' }} />
-        <VerticalLine style={{ left: '66.66%' }} />
+        <VerticalLine style={{ left: "33.33%" }} />
+        <VerticalLine style={{ left: "66.66%" }} />
       </DashboardContainer>
     </Container>
   );
@@ -66,7 +85,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
 `;
 
 const Header = styled.div`
@@ -78,14 +96,14 @@ const Header = styled.div`
 `;
 
 const Title = styled.div`
- color: var(--gray-800Font, #363636);
-/* title/Md */
-font-family: Pretendard;
-font-size: 18px;
-font-style: normal;
-font-weight: 700;
-line-height: 120%; /* 21.6px */
-letter-spacing: -0.36px;
+  color: var(--gray-800Font, #363636);
+  /* title/Md */
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 21.6px */
+  letter-spacing: -0.36px;
 `;
 
 const DashboardContainer = styled.div`
@@ -93,12 +111,12 @@ const DashboardContainer = styled.div`
   height: 106px;
   flex-shrink: 0;
   border-radius: 16px;
-  border: 1px solid #D9D9D9;
-  background: #FFF;
+  border: 1px solid #d9d9d9;
+  background: #fff;
   position: relative;
   padding: 0;
   box-sizing: border-box;
-  margin: 18px 0;
+  margin: 0px 0 18px;
 `;
 
 const Grid = styled.div`
@@ -154,8 +172,8 @@ const NegativeValue = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--angry-500, #FF946D);
-  font-family: 'Stick', sans-serif;
+  color: var(--angry-500, #ff946d);
+  font-family: "Stick", sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
@@ -166,8 +184,8 @@ const PositiveValue = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--happy-500, #FFE156);
-  font-family: 'Stick', sans-serif;
+  color: var(--happy-500, #ffe156);
+  font-family: "Stick", sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
@@ -175,7 +193,7 @@ const PositiveValue = styled.div`
 `;
 
 const StyledSpan = styled.span`
-  color: var(--fear-500, #B69FF8);
+  color: var(--fear-500, #b69ff8);
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
@@ -186,7 +204,7 @@ const StyledSpan = styled.span`
 `;
 
 const SubText = styled.div`
-  color: #8A8A8A;
+  color: #8a8a8a;
   font-family: Pretendard;
   font-size: 10px;
   font-style: normal;
@@ -200,7 +218,7 @@ const HorizontalLine = styled.div`
   left: 0;
   width: 100%;
   height: 0;
-  border-top: 2px solid var(--gray-400Neutral, #C5C5C5);
+  border-top: 2px solid var(--gray-400Neutral, #c5c5c5);
 `;
 
 const VerticalLine = styled.div`
@@ -208,7 +226,7 @@ const VerticalLine = styled.div`
   top: 0;
   bottom: 0;
   width: 0;
-  border-left: 2px solid var(--gray-400Neutral, #C5C5C5);
+  border-left: 2px solid var(--gray-400Neutral, #c5c5c5);
 `;
 
 export default WordAnalysisDashboard;

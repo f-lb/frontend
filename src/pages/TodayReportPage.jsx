@@ -80,9 +80,7 @@ export default function TodayReportPage() {
           </ul>
         </EmotionDistribution>
 
-        <div>
-          <h2>문장분석</h2>
-
+        <SentenceAnalysis>
           <WordAnalysisDashboard
             totalSentences={totalSentences}
             negativeSentences={negativeSentences}
@@ -91,7 +89,22 @@ export default function TodayReportPage() {
             negativeVariance={negativeVariance}
             positiveVariance={positiveVariance}
           />
-        </div>
+
+          <p>
+            오늘은 날씨가 흐렸다. 그래서 그런지 나도 같이 우울해지는 느낌이었다.
+            비가 왔던가? 안나가봐서 모르겠다. 오늘은 악몽을 꾸었다. 졸업작품전에
+            아무 작품도 내지 못해 졸업을 못하는 꿈이었다. 요즘 졸업준비를 하면서
+            불안감이 점점 커져가는데, 아직 아무것도 진행된게 없어서 큰일이다.
+            악몽인거 깨닫고 일단 몸을 일으켜서 세수 하고 방을 정리하려 했지만,
+            갑자기 확 무기력해져서 그냥 누워버렸다. 그 상태로 몇 시간이고 숏츠
+            보면서 시간 보냈는데 어느새 자버린건지 눈떠보니 저녁이 됐다.
+            저녁에는 나름 다이어트 해보겠다고 직접 요리했는데 망했다. 설탕 대신
+            소금 넣은듯.. 아무튼 맛없었지만 재미는 있었다. 꾸역꾸역 먹고, 밤이
+            되어서야 컴퓨터 앞에 얹았는데 뭘 해야할지 너무 막막하고 집중도 잘
+            안돼서 일기부터 쓴다. 매번 후회하는 날이 반복되니, 어떻게 해야 할지
+            모르겠다. 암튼 오늘의 일기 끝.
+          </p>
+        </SentenceAnalysis>
       </Main>
     </>
   );
@@ -196,4 +209,18 @@ const GraphItem = styled.div`
   background: ${({ $color }) => $color};
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+`;
+
+const SentenceAnalysis = styled.div`
+  padding: 20px 0;
+  border-top: 8px solid #e0e0e0;
+  border-bottom: 8px solid #e0e0e0;
+  margin: 0 -15px;
+
+  p {
+    background: #dcdcdc;
+    margin: 0 20px;
+    padding: 10px;
+    border-radius: 12px;
+  }
 `;
