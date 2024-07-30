@@ -7,29 +7,29 @@ import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
 
 const SummeryPage = ({ mode = "template" }) => {
-    return (
-        <Container>
-            <NavBar>
-                <Arrow>
-                    <BackIcon />
-                </Arrow>
-                <NavTitle>일기</NavTitle>
-                <Correction>
-                    <CorrectIcon />
-                </Correction>
-            </NavBar>
-            <Content>
-                {mode === "free" ? (
-                    <FreeMode />
-                ) : (
-                    <TemplateMode />
-                )}
-            </Content>
-            <ButtonWrapper>
-                <Button>마음 리포트 보러가기</Button>
-            </ButtonWrapper>
-        </Container>
-    );
+  return (
+    <Container>
+      <NavBar>
+        <Arrow>
+          <BackIcon />
+        </Arrow>
+        <NavTitle>일기</NavTitle>
+        <Correction>
+          <CorrectIcon />
+        </Correction>
+      </NavBar>
+      <Content>
+        {mode === "free" ? (
+          <FreeMode />
+        ) : (
+          <TemplateMode />
+        )}
+      </Content>
+      <ButtonWrapper>
+        <Button>마음 리포트 보러가기</Button>
+      </ButtonWrapper>
+    </Container>
+  );
 };
 
 const Container = styled.div`

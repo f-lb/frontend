@@ -3,54 +3,54 @@ import styled from "styled-components";
 import { ReactComponent as TodayIcon } from "../assets/today.svg";
 
 const FreeMode = () => {
-    const date = new Date("2024-07-16");
-    const title = "작업하면서 요아정 시켜먹기";
-    const subtitle = "놀람 가득했던";
-    const dayofweek = "토요일";
-    const content = `냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 또 먹어야징 냠냠 냠냠 냠냠 냠냠 냠냠 냠냠냠냠 냠냠 냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 또 먹어야징 냠냠 냠냠 냠냠 냠냠 냠냠 냠냠냠냠 냠냠냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다.  우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일`;
-    const emotions = ["놀라운", "행복한"];
+  const date = new Date("2024-07-16");
+  const title = "작업하면서 요아정 시켜먹기";
+  const subtitle = "놀람 가득했던";
+  const dayofweek = "토요일";
+  const content = `냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 또 먹어야징 냠냠 냠냠 냠냠 냠냠 냠냠 냠냠냠냠 냠냠 냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 또 먹어야징 냠냠 냠냠 냠냠 냠냠 냠냠 냠냠냠냠 냠냠냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다.  우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일`;
+  const emotions = ["놀라운", "행복한"];
 
-    const formatDate = (date) => {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        return `${year}년 ${month}월 ${day}일`;
-    };
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}년 ${month}월 ${day}일`;
+  };
 
-    const isToday = (date) => {
-        const today = new Date();
-        return date.toDateString() === today.toDateString();
-    };
+  const isToday = (date) => {
+    const today = new Date();
+    return date.toDateString() === today.toDateString();
+  };
 
-    return (
-        <FreeModeWrapper>
-            <Day>
-                <DateText>
-                    {formatDate(date)}
-                    <SubTitle>{subtitle} {dayofweek}</SubTitle>
-                </DateText>
-                {isToday(date) && (
-                    <TodayIconWrapper>
-                        <TodayIcon />
-                    </TodayIconWrapper>
-                )}
-            </Day>
-            <Dairy>
-                <DairyTitle>{title}</DairyTitle>
-                <DairyContentWrapper>
-                    <DairyContent>{content}</DairyContent>
-                </DairyContentWrapper>
-                <DairyFooter>
-                    <Time>{date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</Time>
-                    <Emotions>
-                        {emotions.map((emotion, index) => (
-                            <Emotion key={index}>#{emotion}</Emotion>
-                        ))}
-                    </Emotions>
-                </DairyFooter>
-            </Dairy>
-        </FreeModeWrapper>
-    );
+  return (
+    <FreeModeWrapper>
+      <Day>
+        <DateText>
+          {formatDate(date)}
+          <SubTitle>{subtitle} {dayofweek}</SubTitle>
+        </DateText>
+        {isToday(date) && (
+          <TodayIconWrapper>
+            <TodayIcon />
+          </TodayIconWrapper>
+        )}
+      </Day>
+      <Dairy>
+        <DairyTitle>{title}</DairyTitle>
+        <DairyContentWrapper>
+          <DairyContent>{content}</DairyContent>
+        </DairyContentWrapper>
+        <DairyFooter>
+          <Time>{date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</Time>
+          <Emotions>
+            {emotions.map((emotion, index) => (
+              <Emotion key={index}>#{emotion}</Emotion>
+            ))}
+          </Emotions>
+        </DairyFooter>
+      </Dairy>
+    </FreeModeWrapper>
+  );
 };
 
 const FreeModeWrapper = styled.div`
@@ -78,7 +78,8 @@ const DateText = styled.div`
 `;
 
 const SubTitle = styled.div`
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 16px;
   color: var(--gray-600, #828282);
   font-family: Pretendard;
   font-size: 14px;
