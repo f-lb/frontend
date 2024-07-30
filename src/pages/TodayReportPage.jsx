@@ -3,6 +3,8 @@ import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
 import AngryCover from "../assets/cover-angry.svg";
 import Chart from "react-apexcharts";
+import CommingSoon from "../assets/comming-soon.jpeg";
+import { Link } from "react-router-dom";
 
 const series = [
   {
@@ -177,6 +179,25 @@ export default function TodayReportPage() {
           </Header>
           <Chart options={options} series={series} />
         </Graph>
+
+        <div
+          style={{
+            padding: "20px 15px",
+            backgroundColor: "#e0e0e0",
+            margin: "0 -15px",
+          }}
+        >
+          <h3 style={{ marginBottom: "10px" }}>
+            과거에도 비슷한 감정을 느꼈어요
+          </h3>
+          <img
+            style={{ width: "100%", display: "block" }}
+            src={CommingSoon}
+            alt="comming_soon"
+          />
+        </div>
+
+        <LinkBtn>메인으로 가기</LinkBtn>
       </Main>
     </>
   );
@@ -215,7 +236,7 @@ const Cover = styled.div`
 
 const Main = styled.main`
   margin-top: 230px;
-  padding: 0 15px 200px;
+  padding: 0 15px 120px;
 
   p {
     //styleName: body/Md;
@@ -338,4 +359,15 @@ const Graph = styled.div`
       }
     }
   }
+`;
+
+const LinkBtn = styled(Link)`
+  background: #000000;
+  color: #fff;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 15px 0;
+  border-radius: 8px;
+  margin-top: 20px;
 `;
