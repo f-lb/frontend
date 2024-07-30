@@ -7,11 +7,11 @@ import WeeklyModeCalendarPage from "./components/WeeklyModeCalendarPage";
 import LoadingPage from "./pages/LoadingPage";
 import { lazy, Suspense } from "react";
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const TodayReportPageLazyed = lazy(async () => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(import("./pages/TodayReportPage")), 2000);
-  });
+  await delay(2000);
+  return import("./pages/TodayReportPage");
 });
 
 function App() {
@@ -28,14 +28,12 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/record" element={<RecordPage />} />
           </Route>
-
         </Routes>
-          <Suspense fallback={<LoadingPage/>}>
-            {/* <Route path="/loading" element={<LoadingPage />} /> */}
-            <Routes>
-              <Route path="/today-report" element={<TodayReportPageLazyed/>}/>
-            </Routes>
-          </Suspense>
+        <Suspense fallback={<LoadingPage />}>
+          <Routes>
+            <Route path="/today-report" element={<TodayReportPageLazyed />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </RootLayout>
   );
