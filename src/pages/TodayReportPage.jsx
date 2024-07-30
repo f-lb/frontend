@@ -1,17 +1,17 @@
-import React from 'react';
-import WordAnalysisDashboard from '../components/WordAnalysisDashboard';
+import React from "react";
+import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
 import AngryCover from "../assets/cover-angry.svg";
 
 export default function TodayReportPage() {
-   // 더미 데이터 설정
-    const totalSentences = 38;
-    const negativeSentences = 5;
-    const positiveSentences = 2;
-    const yesterdayNegativePercent = 8.7;
-    const negativeVariance = -2;
-    const positiveVariance = 0;
-  
+  // 더미 데이터 설정
+  const totalSentences = 38;
+  const negativeSentences = 5;
+  const positiveSentences = 2;
+  const yesterdayNegativePercent = 8.7;
+  const negativeVariance = -2;
+  const positiveVariance = 0;
+
   return (
     <>
       <Header>
@@ -83,13 +83,14 @@ export default function TodayReportPage() {
         <div>
           <h2>문장분석</h2>
 
-   <WordAnalysisDashboard
-                totalSentences={totalSentences}
-                negativeSentences={negativeSentences}
-                positiveSentences={positiveSentences}
-                yesterdayNegativePercent={yesterdayNegativePercent}
-                negativeVariance={negativeVariance}
-                positiveVariance={positiveVariance}
+          <WordAnalysisDashboard
+            totalSentences={totalSentences}
+            negativeSentences={negativeSentences}
+            positiveSentences={positiveSentences}
+            yesterdayNegativePercent={yesterdayNegativePercent}
+            negativeVariance={negativeVariance}
+            positiveVariance={positiveVariance}
+          />
         </div>
       </Main>
     </>
