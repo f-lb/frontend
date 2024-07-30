@@ -53,7 +53,7 @@ const Title = styled.h1`
   span {
     font-family: stick;
     font-size: 32px;
-    font-weight: 400;
+    font-weight: 900;
     line-height: 46.34px;
     text-align: left;
   }
