@@ -2,6 +2,67 @@ import React from "react";
 import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
 import AngryCover from "../assets/cover-angry.svg";
+import Chart from "react-apexcharts";
+
+const series = [
+  {
+    data: [30, 40, 45, 50, 49, 60, 70, 91],
+  },
+  {
+    data: [10, 20, 95, 40, 29, 60, 60, 91],
+  },
+];
+
+const options = {
+  toolbar: {
+    show: false,
+  },
+  chart: {
+    height: 350,
+    stacked: false,
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  colors: ["#ffdc72", "#ffb199"],
+  stroke: {
+    width: [4, 4],
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "20%",
+    },
+  },
+  xaxis: {
+    categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+  },
+  yaxis: [
+    {
+      axisTicks: {
+        show: true,
+      },
+      axisBorder: {
+        show: false,
+        color: "#FF1654",
+      },
+      labels: {
+        show: false,
+      },
+      title: {
+        style: {
+          color: "#FF1654",
+        },
+      },
+      tooltip: {
+        show: false,
+      },
+    },
+  ],
+  legend: {
+    horizontalAlign: "left",
+    offsetX: 40,
+  },
+};
 
 export default function TodayReportPage() {
   // 더미 데이터 설정
@@ -114,6 +175,7 @@ export default function TodayReportPage() {
               <span>부정적단어</span>
             </div>
           </Header>
+          <Chart options={options} series={series} />
         </Graph>
       </Main>
     </>
