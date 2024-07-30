@@ -40,32 +40,32 @@ export default function TodayReportPage() {
           <h2>오늘의 감정 분포도</h2>
           <ul>
             <li>
-              <div>분노</div>
-              <div></div>
+              <h3>분노</h3>
+              <GraphItem $percent={100} $color="#ff946d" />
             </li>
             <li>
-              <div>놀람</div>
-              <div></div>
+              <h3>놀람</h3>
+              <GraphItem $percent={42} $color="#faa3e0" />
             </li>
             <li>
-              <div>불쾌감</div>
-              <div></div>
+              <h3>불쾌감</h3>
+              <GraphItem $percent={42} $color="#a9eb90" />
             </li>
             <li>
-              <div>두려움</div>
-              <div></div>
+              <h3>두려움</h3>
+              <GraphItem $percent={42} $color="#b69ff8" />
             </li>
             <li>
-              <div>기쁨</div>
-              <div></div>
+              <h3>기쁨</h3>
+              <GraphItem $percent={42} $color="#ffe156" />
             </li>
             <li>
-              <div>슬픔</div>
-              <div></div>
+              <h3>슬픔</h3>
+              <GraphItem $percent={42} $color="#bdd5fa" />
             </li>
             <li>
-              <div>중립</div>
-              <div></div>
+              <h3>중립</h3>
+              <GraphItem $percent={42} $color="#bdd5fa" />
             </li>
           </ul>
         </EmotionDistribution>
@@ -118,11 +118,60 @@ const Main = styled.main`
     letter-spacing: -0.02em;
     text-align: justified;
     margin-top: 10px;
+    color: #111111;
+    padding-bottom: 10px;
   }
 `;
 
 const EmotionDistribution = styled.div`
   background-color: #fff;
   margin: 0 -15px;
-  border-bottom: 8px solid #eoeoeo;
+  border-bottom: 8px solid #e0e0e0;
+
+  padding: 24px 16px 24px 16px;
+
+  h2 {
+    //styleName: title/Md;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21.6px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    li {
+      display: flex;
+      h3 {
+        //styleName: caption/Md;
+        font-family: Pretendard;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14.32px;
+        text-align: left;
+
+        color: #111111;
+
+        width: 15%;
+        flex-shrink: 0;
+        background: #f3f3f3;
+
+        padding: 4px 5px 3px 7px;
+      }
+      div {
+      }
+    }
+  }
+`;
+
+const GraphItem = styled.div`
+  width: calc(${({ $percent }) => $percent}% - 15%);
+  background: ${({ $color }) => $color};
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 `;
