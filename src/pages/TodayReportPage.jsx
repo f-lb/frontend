@@ -35,6 +35,40 @@ export default function TodayReportPage() {
           상황을 바라보세요. 유머를 통해 긴장을 풀거나, 긍정적인 면을 찾으려는
           노력이 분노를 완화하는 데 도움이 될 수 있습니다.
         </p>
+
+        <div>
+          <h2>오늘의 감정 분포도</h2>
+          <ul>
+            <li>
+              <div>분노</div>
+              <div></div>
+            </li>
+            <li>
+              <div>놀람</div>
+              <div></div>
+            </li>
+            <li>
+              <div>불쾌감</div>
+              <div></div>
+            </li>
+            <li>
+              <div>두려움</div>
+              <div></div>
+            </li>
+            <li>
+              <div>기쁨</div>
+              <div></div>
+            </li>
+            <li>
+              <div>슬픔</div>
+              <div></div>
+            </li>
+            <li>
+              <div>중립</div>
+              <div></div>
+            </li>
+          </ul>
+        </div>
       </Main>
     </>
   );
@@ -73,7 +107,7 @@ const Cover = styled.div`
 
 const Main = styled.main`
   margin-top: 230px;
-  padding: 0 15px 0;
+  padding: 0 15px 200px;
 
   p {
     //styleName: body/Md;
