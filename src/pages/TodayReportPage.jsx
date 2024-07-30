@@ -2,6 +2,69 @@ import React from "react";
 import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
 import AngryCover from "../assets/cover-angry.svg";
+import Chart from "react-apexcharts";
+import CommingSoon from "../assets/comming-soon.jpeg";
+import { Link } from "react-router-dom";
+
+const series = [
+  {
+    data: [30, 40, 45, 50, 49, 60, 70, 91],
+  },
+  {
+    data: [10, 20, 95, 40, 29, 60, 60, 91],
+  },
+];
+
+const options = {
+  toolbar: {
+    show: false,
+  },
+  chart: {
+    height: 350,
+    stacked: false,
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  colors: ["#ffdc72", "#ffb199"],
+  stroke: {
+    width: [4, 4],
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "20%",
+    },
+  },
+  xaxis: {
+    categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+  },
+  yaxis: [
+    {
+      axisTicks: {
+        show: true,
+      },
+      axisBorder: {
+        show: false,
+        color: "#FF1654",
+      },
+      labels: {
+        show: false,
+      },
+      title: {
+        style: {
+          color: "#FF1654",
+        },
+      },
+      tooltip: {
+        show: false,
+      },
+    },
+  ],
+  legend: {
+    horizontalAlign: "left",
+    offsetX: 40,
+  },
+};
 
 export default function TodayReportPage() {
   // 더미 데이터 설정
@@ -80,9 +143,7 @@ export default function TodayReportPage() {
           </ul>
         </EmotionDistribution>
 
-        <div>
-          <h2>문장분석</h2>
-
+        <SentenceAnalysis>
           <WordAnalysisDashboard
             totalSentences={totalSentences}
             negativeSentences={negativeSentences}
@@ -91,7 +152,52 @@ export default function TodayReportPage() {
             negativeVariance={negativeVariance}
             positiveVariance={positiveVariance}
           />
+
+          <p>
+            오늘은 날씨가 흐렸다. 그래서 그런지 나도 같이 우울해지는 느낌이었다.
+            비가 왔던가? 안나가봐서 모르겠다. 오늘은 악몽을 꾸었다. 졸업작품전에
+            아무 작품도 내지 못해 졸업을 못하는 꿈이었다. 요즘 졸업준비를 하면서
+            불안감이 점점 커져가는데, 아직 아무것도 진행된게 없어서 큰일이다.
+            악몽인거 깨닫고 일단 몸을 일으켜서 세수 하고 방을 정리하려 했지만,
+            갑자기 확 무기력해져서 그냥 누워버렸다. 그 상태로 몇 시간이고 숏츠
+            보면서 시간 보냈는데 어느새 자버린건지 눈떠보니 저녁이 됐다.
+            저녁에는 나름 다이어트 해보겠다고 직접 요리했는데 망했다. 설탕 대신
+            소금 넣은듯.. 아무튼 맛없었지만 재미는 있었다. 꾸역꾸역 먹고, 밤이
+            되어서야 컴퓨터 앞에 얹았는데 뭘 해야할지 너무 막막하고 집중도 잘
+            안돼서 일기부터 쓴다. 매번 후회하는 날이 반복되니, 어떻게 해야 할지
+            모르겠다. 암튼 오늘의 일기 끝.
+          </p>
+        </SentenceAnalysis>
+
+        <Graph>
+          <Header>
+            <h3>30일간의 어휘 변화</h3>
+            <div>
+              <span>긍정적 단어</span>
+              <span>부정적단어</span>
+            </div>
+          </Header>
+          <Chart options={options} series={series} />
+        </Graph>
+
+        <div
+          style={{
+            padding: "20px 15px",
+            backgroundColor: "#e0e0e0",
+            margin: "0 -15px",
+          }}
+        >
+          <h3 style={{ marginBottom: "10px" }}>
+            과거에도 비슷한 감정을 느꼈어요
+          </h3>
+          <img
+            style={{ width: "100%", display: "block" }}
+            src={CommingSoon}
+            alt="comming_soon"
+          />
         </div>
+
+        <LinkBtn>메인으로 가기</LinkBtn>
       </Main>
     </>
   );
@@ -130,7 +236,7 @@ const Cover = styled.div`
 
 const Main = styled.main`
   margin-top: 230px;
-  padding: 0 15px 200px;
+  padding: 0 15px 120px;
 
   p {
     //styleName: body/Md;
@@ -196,4 +302,72 @@ const GraphItem = styled.div`
   background: ${({ $color }) => $color};
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+`;
+
+const SentenceAnalysis = styled.div`
+  padding: 20px 0;
+  border-top: 8px solid #e0e0e0;
+  border-bottom: 8px solid #e0e0e0;
+  margin: 0 -15px;
+
+  p {
+    background: #dcdcdc;
+    margin: 0 20px;
+    padding: 10px;
+    border-radius: 12px;
+  }
+`;
+
+const Graph = styled.div`
+  background: #fff;
+  padding: 30px 0;
+  margin: 0 -15px;
+  padding: 20px;
+
+  ${Header} {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      span {
+        //styleName: caption/graySm;
+        font-family: Pretendard;
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 13.13px;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        &:before {
+          content: " ";
+          display: block;
+          width: 15px;
+          height: 3px;
+          background: #ffdc72;
+        }
+
+        &:last-child {
+          &:before {
+            background: #ffb199;
+          }
+        }
+      }
+    }
+  }
+`;
+
+const LinkBtn = styled(Link)`
+  background: #000000;
+  color: #fff;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 15px 0;
+  border-radius: 8px;
+  margin-top: 20px;
 `;
