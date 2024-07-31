@@ -16,10 +16,10 @@ const series = [
 ];
 
 const options = {
-  toolbar: {
-    show: false,
-  },
   chart: {
+    toolbar: {
+      show: false,
+    },
     height: 350,
     stacked: false,
   },
@@ -290,8 +290,6 @@ const EmotionDistribution = styled.div`
         background: #f3f3f3;
 
         padding: 4px 5px 3px 7px;
-      }
-      div {
       }
     }
   }
