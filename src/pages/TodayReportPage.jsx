@@ -16,10 +16,10 @@ const series = [
 ];
 
 const options = {
-  toolbar: {
-    show: false,
-  },
   chart: {
+    toolbar: {
+      show: false,
+    },
     height: 350,
     stacked: false,
   },
