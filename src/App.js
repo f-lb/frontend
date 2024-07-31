@@ -5,6 +5,7 @@ import { BnbLayout, RootLayout } from "./layouts";
 import MontlyModeCalendarPage from "./components/MontlyModeCalendarPage";
 import WeeklyModeCalendarPage from "./components/WeeklyModeCalendarPage";
 import LoadingPage from "./pages/LoadingPage";
+import SummeryPage from "./pages/SummeryPage";  // SummeryPage 가져오기
 import { lazy, Suspense } from "react";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -28,6 +29,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/record" element={<RecordPage />} />
           </Route>
+          <Route path="/summary" element={<SummeryPage />} />  {/* SummeryPage 경로 추가 */}
         </Routes>
         <Suspense fallback={<LoadingPage />}>
           <Routes>
