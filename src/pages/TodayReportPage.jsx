@@ -291,8 +291,6 @@ const EmotionDistribution = styled.div`
 
         padding: 4px 5px 3px 7px;
       }
-      div {
-      }
     }
   }
 `;
