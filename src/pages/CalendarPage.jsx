@@ -6,7 +6,6 @@ import CalendarSIcon02 from "../assets/calendar_s02.svg";
 import Filled_CalendarSIcon01 from "../assets/calendar_s01_filled.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
 import { useState } from "react";
-import MontlyModeCalendarPage from "../components/MontlyModeCalendarPage";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 export default function CalendarPage() {
