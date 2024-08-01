@@ -10,7 +10,9 @@ export default function RecordPage() {
     <>
       <Nav>
         <Link style={{ position: "absolute", left: "15px" }}>
-          <img src={BackIcon} alt="back_icon" />
+          <Link to="/">
+            <img src={BackIcon} alt="back_icon" />
+          </Link>
         </Link>
         일기
       </Nav>
