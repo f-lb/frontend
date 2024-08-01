@@ -1,137 +1,42 @@
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { selectedMonthState } from "../recoil/atom";
+import { getDatesByMon } from "../util";
 
 export default function WeeklyModeCalendarPage() {
+  const selectedMonth = useRecoilValue(selectedMonthState);
+
   return (
     <DateWithDiaries>
-      <DateWithDiary>
-        <DateAndDay>
-          <Day>일</Day>
-          <Date $color={"#ffb193"}>13</Date>
-        </DateAndDay>
-        <Diary>
-          <DiaryWrapper style={{ borderBottom: "1px solid #c5c5c5" }}>
-            <h2>작업하면서 요아정 시켜먹기</h2>
-            <p>
-              냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라,
-              미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹었어 맛이 있었어
-            </p>
-            <div>
-              <span>16:24 PM</span>
-              <Emotions>
-                <Emotion $color={"#ff946d"} />
-                <Emotion $color={"#FFE156"} />
-              </Emotions>
-            </div>
-          </DiaryWrapper>
-        </Diary>
-      </DateWithDiary>
-      <DateWithDiary>
-        <DateAndDay>
-          <Day>일</Day>
-          <Date $color={"#ffc2f6"}>13</Date>
-        </DateAndDay>
-        <Diary>
-          <DiaryWrapper style={{ borderBottom: "1px solid #c5c5c5" }}>
-            <h2>작업하면서 요아정 시켜먹기</h2>
-            <p>
-              냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라,
-              미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹었어 맛이 있었어
-            </p>
-            <div>
-              <span>16:24 PM</span>
-              <Emotions>
-                <Emotion $color={"#ff946d"} />
-                <Emotion $color={"#FFE156"} />
-              </Emotions>
-            </div>
-          </DiaryWrapper>
-        </Diary>
-      </DateWithDiary>
-      <DateWithDiary>
-        <DateAndDay>
-          <Day>일</Day>
-          <Date $color={"#d1e3fe"}>13</Date>
-        </DateAndDay>
-        <Diary>
-          <DiaryWrapper style={{ borderBottom: "1px solid #c5c5c5" }}>
-            <h2>작업하면서 요아정 시켜먹기</h2>
-            <p>
-              냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라,
-              미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹었어 맛이 있었어
-            </p>
-            <div>
-              <span>16:24 PM</span>
-              <Emotions>
-                <Emotion $color={"#ff946d"} />
-                <Emotion $color={"#FFE156"} />
-              </Emotions>
-            </div>
-          </DiaryWrapper>
-        </Diary>
-      </DateWithDiary>
-      <DateWithDiary>
-        <DateAndDay>
-          <Day>일</Day>
-          <Date $color={"#fff"}>13</Date>
-        </DateAndDay>
-        <Diary>
-          <DiaryWrapper style={{ borderBottom: "1px solid #c5c5c5" }}>
-            <h2>
-              반가워요!
-              <br />
-              오늘의 빈칸을 채워볼까요?
-            </h2>
-            <LinkToPostContainer>
-              <LinkToPost>일기 작성하고 분석받기 {">"}</LinkToPost>
-            </LinkToPostContainer>
-          </DiaryWrapper>
-        </Diary>
-      </DateWithDiary>
-      <DateWithDiary>
-        <DateAndDay>
-          <Day>일</Day>
-          <Date $color={"#ffb193"}>13</Date>
-        </DateAndDay>
-        <Diary>
-          <DiaryWrapper style={{ borderBottom: "1px solid #c5c5c5" }}>
-            <h2>작업하면서 요아정 시켜먹기</h2>
-            <p>
-              냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라,
-              미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹었어 맛이 있었어
-            </p>
-            <div>
-              <span>16:24 PM</span>
-              <Emotions>
-                <Emotion $color={"#ff946d"} />
-                <Emotion $color={"#FFE156"} />
-              </Emotions>
-            </div>
-          </DiaryWrapper>
-        </Diary>
-      </DateWithDiary>
-      <DateWithDiary>
-        <DateAndDay>
-          <Day>일</Day>
-          <Date $color={"#ffb193"}>13</Date>
-        </DateAndDay>
-        <Diary>
-          <DiaryWrapper>
-            <h2>작업하면서 요아정 시켜먹기</h2>
-            <p>
-              냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라,
-              미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹었어 맛이 있었어
-            </p>
-            <div>
-              <span>16:24 PM</span>
-              <Emotions>
-                <Emotion $color={"#ff946d"} />
-                <Emotion $color={"#FFE156"} />
-              </Emotions>
-            </div>
-          </DiaryWrapper>
-        </Diary>
-      </DateWithDiary>
+      {getDatesByMon({ year: 2024, mon: selectedMonth }).map((date) => {
+        if (date < 0) return;
+        return (
+          <DateWithDiary>
+            <DateAndDay>
+              <Day>일</Day>
+              <Date $color={"#ffb193"}>{date}</Date>
+            </DateAndDay>
+            <Diary>
+              <DiaryWrapper style={{ borderBottom: "1px solid #c5c5c5" }}>
+                <h2>작업하면서 요아정 시켜먹기</h2>
+                <p>
+                  냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘,
+                  그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹었어
+                  맛이 있었어
+                </p>
+                <div>
+                  <span>16:24 PM</span>
+                  <Emotions>
+                    <Emotion $color={"#ff946d"} />
+                    <Emotion $color={"#FFE156"} />
+                  </Emotions>
+                </div>
+              </DiaryWrapper>
+            </Diary>
+          </DateWithDiary>
+        );
+      })}
     </DateWithDiaries>
   );
 }
