@@ -76,7 +76,7 @@ export default function TodayReportPage() {
   const positiveVariance = 0;
 
   return (
-    <>
+    <Container>
       <Header>
         <Cover>
           <img src={AngryCover} alt="angry_cover" />
@@ -199,9 +199,14 @@ export default function TodayReportPage() {
 
         <LinkBtn>메인으로 가기</LinkBtn>
       </Main>
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  min-height: 100vh;
+  background: #fafafa;
+`;
 
 const Header = styled.header`
   position: relative;
