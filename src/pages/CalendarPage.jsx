@@ -2,7 +2,10 @@ import styled from "styled-components";
 import BellIcon from "../assets/bell.svg";
 import ArrowIcon from "../assets/arrow.svg";
 import CalendarSIcon01 from "../assets/calendar_s01.svg";
+import CalendarSIcon02 from "../assets/calendar_s02.svg";
+import Filled_CalendarSIcon01 from "../assets/calendar_s01_filled.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
+<<<<<<< HEAD
 import DairySummary from "../components/DairySummary";
 
 const mockDatas = [
@@ -259,8 +262,15 @@ const mockDatas = [
     future: true,
   },
 ];
+=======
+import { useState } from "react";
+import MontlyModeCalendarPage from "../components/MontlyModeCalendarPage";
+import { Link, NavLink, Outlet } from "react-router-dom";
+>>>>>>> 5277aa86e40215e9bfc586adf2460b703db5a0c0
 
 export default function CalendarPage() {
+  const [calendarType, setCalendarType] = useState("monthlyMode");
+
   return (
     <Container>
       <Header>
@@ -283,14 +293,33 @@ export default function CalendarPage() {
           </YearCtrl>
         </DateCtrl>
         <CalendarToggle>
-          <ToggleBtn>
-            <img src={CalendarSIcon01} alt="calendar icon" />
+          <ToggleBtn
+            onClick={() => setCalendarType("monthlyMode")}
+            $isActive={calendarType === "monthlyMode"}
+            $isMonthlyMode
+            to="/"
+          >
+            {calendarType === "monthlyMode" ? (
+              <img src={Filled_CalendarSIcon01} alt="calendar icon filled" />
+            ) : (
+              <img src={CalendarSIcon01} alt="calendar icon" />
+            )}
           </ToggleBtn>
-          <ToggleBtn>
-            <img src={Filled_CalendarSIcon02} alt="calendar icon" />
+          <ToggleBtn
+            onClick={() => setCalendarType("weeklyMode")}
+            $isActive={calendarType === "weeklyMode"}
+            $isMonthlyMode={false}
+            to="/weeklyMode"
+          >
+            {calendarType === "weeklyMode" ? (
+              <img src={Filled_CalendarSIcon02} alt="calendar icon filled" />
+            ) : (
+              <img src={CalendarSIcon02} alt="calendar icon" />
+            )}
           </ToggleBtn>
         </CalendarToggle>
       </CalendarCtrl>
+<<<<<<< HEAD
       <WeeksBar>
         <li>일</li>
         <li>월</li>
@@ -327,6 +356,10 @@ export default function CalendarPage() {
           <button>기록하기</button>
         </Guide>
       </RecordEmpty>
+=======
+
+      <Outlet />
+>>>>>>> 5277aa86e40215e9bfc586adf2460b703db5a0c0
     </Container>
   );
 }
@@ -346,6 +379,7 @@ const CalendarCtrl = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #fff;
+  border-bottom: 2px solid #c5c5c5;
 `;
 
 const DateCtrl = styled.div`
@@ -376,56 +410,13 @@ const CalendarToggle = styled.div`
   height: 30px;
 `;
 
-const ToggleBtn = styled.button`
+const ToggleBtn = styled(NavLink)`
   padding: 3px 7px;
   height: 31px;
-  &:nth-child(2){
-    border-left: 2px solid #bfbfbf;
-    overflow: clip
-    background-color:red;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-    background-color: #A4BFED;
-  }
-`;
-
-const WeeksBar = styled.ul`
+  display: block;
   display: flex;
-  padding: 10px 0;
-  color: #404040;
-  background-color: #f3f3f3;
-  font-size: 12px;
-  border-top: 2px solid #c5c5c5;
-  li {
-    flex-grow: 1;
-    text-align: center;
-  }
-`;
-
-const Calendar = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  padding: 24px 10px;
-  text-align: center;
-  gap: 7px;
-  row-gap: 16px;
-  border-bottom: 8px solid #d9d9d9;
-  background-color: #fff;
-`;
-
-const Date = styled.li`
-  cursor: pointer;
-  text-align: center;
-  color: #363636;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  height: 42px;
-  display: flex;
-  align-items: center;
   justify-content: center;
+<<<<<<< HEAD
   border-radius: 12px;
   background-color: ${({ $color }) => $color};
   opacity: ${({ $isOutOfDate }) => ($isOutOfDate ? "0.42" : "1")};
@@ -478,4 +469,13 @@ const Guide = styled.div`
     letter-spacing: -0.32px;
     margin-bottom: 16px;
   }
+=======
+  align-items: center;
+
+  ${({ $isActive, $isMonthlyMode }) =>
+    $isActive &&
+    ($isMonthlyMode
+      ? "background-color: #a4bfed; border-right: 3px solid #bfbfbf; border-top-right-radius: 7px;border-bottom-right-radius: 7px;"
+      : "background-color: #a4bfed; border-left: 3px solid #bfbfbf; border-top-left-radius: 7px; border-bottom-left-radius: 7px")}
+>>>>>>> 5277aa86e40215e9bfc586adf2460b703db5a0c0
 `;

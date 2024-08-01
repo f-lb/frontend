@@ -19,7 +19,7 @@ export default function BnbLayout() {
 
       <BnB>
         <BnbItem to="/">
-          {pathname !== "/" ? (
+          {pathname !== "/" && pathname !== "/weeklyMode" ? (
             <img src={CalendarIcon} alt="calendar icon" />
           ) : (
             <img
@@ -52,7 +52,7 @@ export default function BnbLayout() {
               alt="filled canlendar icon"
             />
           )}
-          <span>분석하기</span>
+          <span>리포트</span>
         </BnbItem>
         <BnbItem to="profile">
           {pathname !== "/profile" ? (
