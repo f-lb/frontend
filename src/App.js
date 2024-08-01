@@ -7,6 +7,8 @@ import WeeklyModeCalendarPage from "./components/WeeklyModeCalendarPage";
 import LoadingPage from "./pages/LoadingPage";
 import SummeryPage from "./pages/SummeryPage"; // SummeryPage 가져오기
 import { lazy, Suspense } from "react";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
 
 const TodayReportPageLazyed = lazy(() => {
   return import("./pages/TodayReportPage");
@@ -28,6 +30,8 @@ function App() {
           <Route path="/record" element={<RecordPage />} />
           <Route path="/summary" element={<SummeryPage />} />{" "}
           {/* SummeryPage 경로 추가 */}
+          <Route path="signin" element={<Signin />} />
+          <Route path="signup" element={<Signup />} />
         </Routes>
         <Suspense fallback={<LoadingPage />}>
           <Routes>
