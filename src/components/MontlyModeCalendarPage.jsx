@@ -3,7 +3,7 @@ import RecordIcon from "../assets/record-icon.svg";
 import { getDatesByMon } from "../util";
 import { useRecoilValue } from "recoil";
 import { selectedMonthState } from "../recoil/atom";
-
+import { Link } from "react-router-dom";
 const mockDatas = [
   {
     id: 0,
@@ -328,10 +328,12 @@ export default function MontlyModeCalendarPage() {
             반가워요. <br />
             오늘의 빈칸을 채워볼까요?
           </p>
-          <button>
-            <span>기록하기</span>
-            <img src={RecordIcon} alt="record icon" />
-          </button>
+          <Link to="/record">
+            <button>
+              <span>기록하기</span>
+              <img src={RecordIcon} alt="record icon" />
+            </button>
+          </Link>
         </Guide>
       </RecordEmpty>
     </>

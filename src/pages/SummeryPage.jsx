@@ -6,7 +6,7 @@ import { ReactComponent as CorrectIcon } from "../assets/kebap.svg";
 import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
 
-const SummeryPage = ({ mode = "template" }) => {
+const SummeryPage = ({ mode = "free" }) => {
   return (
     <Container>
       <NavBar>

@@ -165,7 +165,12 @@ const Emotion = styled.div`
   border-radius: 50%;
 `;
 
-const LinkToPost = styled(Link)`
+const LinkToPostWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const LinkToPost = styled.div`
   text-decoration: underline;
   //styleName: caption/graySm;
   font-family: Pretendard;
@@ -173,7 +178,6 @@ const LinkToPost = styled(Link)`
   font-weight: 400;
   line-height: 13.13px;
   text-align: left;
-
   color: #363636;
 `;
 

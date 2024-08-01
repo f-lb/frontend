@@ -17,7 +17,6 @@ export default function RecordPage() {
   return (
     <>
       <Nav>일기</Nav>
-
       <div>
         <Datepick>
           <h2>
