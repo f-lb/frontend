@@ -4,6 +4,7 @@ import TodayCard from "../assets/todayCard.svg";
 import WeeklyCard from "../assets/weeklyCard.svg";
 import MonthlyCard from "../assets/monthlyCard.svg";
 import QuarterlyCard from "../assets/quarterlyCard.svg";
+import { Link } from "react-router-dom";
 
 export default function AnalyzePage() {
   return (
@@ -13,10 +14,12 @@ export default function AnalyzePage() {
         <img src={Frame} alt="Frame" />
       </FrameWrapper>
       <ReportWrapper>
-        <ReportButton background={TodayCard}>
-          <ReportTitle>하루 리포트</ReportTitle>
-          <ReportDesc>나의 하루는 어떤 감정으로 채워졌을까?</ReportDesc>
-        </ReportButton>
+        <ReportLink to="/today-report">
+          <ReportButton background={TodayCard}>
+            <ReportTitle>하루 리포트</ReportTitle>
+            <ReportDesc>나의 하루는 어떤 감정으로 채워졌을까?</ReportDesc>
+          </ReportButton>
+        </ReportLink>
         <Line />
         <ReportButton background={WeeklyCard}>
           <ReportTitle>일주일 리포트</ReportTitle>
@@ -28,7 +31,7 @@ export default function AnalyzePage() {
         </ReportButton>
         <ReportButton background={QuarterlyCard}>
           <ReportTitle>3달 리포트</ReportTitle>
-          <ReportDesc>나의 감정에 대해 보다 완벽히, 알고 싶다면?</ReportDesc>
+          <ReportDesc>나의 감정에 대해 보다 완.벽.히. 알고 싶다면?</ReportDesc>
         </ReportButton>
       </ReportWrapper>
     </Wrapper>
@@ -81,11 +84,15 @@ const ReportWrapper = styled.div`
   box-sizing: border-box;
 `;
 
+const ReportLink = styled(Link)`
+  display: block;
+  width: 100%;
+  max-width: 331px;
+`;
 
 const ReportButton = styled.button`
   display: flex;
   width: 100%;
-  max-width: 331px;
   height: 122px;
   padding: 16px;
   flex-direction: column;
@@ -126,4 +133,3 @@ const Line = styled.div`
   background-color: var(--gray-600, #828282);
   align-self: center;
 `;
-
