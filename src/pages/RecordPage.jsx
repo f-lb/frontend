@@ -8,8 +8,15 @@ const Day = ["", "월", "화", "수", "목", "금", "토", "일"];
 export default function RecordPage() {
   return (
     <>
-      <Nav>일기</Nav>
 
+      <Nav>
+        <Link style={{ position: "absolute", left: "15px" }}>
+          <Link to="/">
+            <img src={BackIcon} alt="back_icon" />
+          </Link>
+        </Link>
+        일기
+      </Nav>
       <div>
         <Datepick>
           <h2>

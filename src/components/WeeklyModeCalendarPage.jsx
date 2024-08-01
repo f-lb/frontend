@@ -83,7 +83,11 @@ export default function WeeklyModeCalendarPage() {
               오늘의 빈칸을 채워볼까요?
             </h2>
             <LinkToPostContainer>
-              <LinkToPost>일기 작성하고 분석받기 {">"}</LinkToPost>
+              <Link to="/record">
+                <LinkToPostWrapper>
+                  <LinkToPost>일기 작성하고 분석받기 {">"}</LinkToPost>
+                </LinkToPostWrapper>
+              </Link>
             </LinkToPostContainer>
           </DiaryWrapper>
         </Diary>
@@ -246,7 +250,12 @@ const Emotion = styled.div`
   border-radius: 50%;
 `;
 
-const LinkToPost = styled(Link)`
+const LinkToPostWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const LinkToPost = styled.div`
   text-decoration: underline;
   //styleName: caption/graySm;
   font-family: Pretendard;
@@ -254,7 +263,6 @@ const LinkToPost = styled(Link)`
   font-weight: 400;
   line-height: 13.13px;
   text-align: left;
-
   color: #363636;
 `;
 
