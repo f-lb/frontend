@@ -9,8 +9,12 @@ import SummeryPage from "./pages/SummeryPage"; // SummeryPage 가져오기
 import { lazy, Suspense } from "react";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import SignupSuccess from "./pages/SignupSuccess";
 
-const TodayReportPageLazyed = lazy(() => {
+const delay = new Promise((resolve)=>setTimeout(resolve,2000))
+
+const TodayReportPageLazyed = lazy(async () => {
+  await delay;
   return import("./pages/TodayReportPage");
 });
 
@@ -32,6 +36,7 @@ function App() {
           {/* SummeryPage 경로 추가 */}
           <Route path="signin" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="signup-success" element={<SignupSuccess />} />
         </Routes>
         <Suspense fallback={<LoadingPage />}>
           <Routes>

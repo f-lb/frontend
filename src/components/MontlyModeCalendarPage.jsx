@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import RecordIcon from "../assets/record-icon.svg";
 
 const mockDatas = [
   {
@@ -317,13 +318,17 @@ export default function MontlyModeCalendarPage() {
         ))}
       </Calendar>
       <RecordEmpty>
-        <span>2024-07-17</span>
         <Guide>
           <p>
             반가워요. <br />
             오늘의 빈칸을 채워볼까요?
           </p>
-          <button>기록하기</button>
+          <button>
+            <span>
+              기록하기
+            </span>
+            <img src={RecordIcon} alt="record icon"/>
+          </button>
         </Guide>
       </RecordEmpty>
     </>
@@ -375,7 +380,7 @@ const Date = styled.div`
 const RecordEmpty = styled.div`
   padding: 10px 10px 100px;
   span {
-    color: #8a8a8a;
+    color: white;
 
     /* caption/Md */
     font-family: Pretendard;
@@ -398,17 +403,18 @@ const RecordEmpty = styled.div`
 
     border-radius: 8px;
     border: 1px solid var(--gray-400Neutral, #c5c5c5);
-    background: var(--sad_primary-500, #a4bfed);
+    background: #000;
+    color: white;
 
     /* calendarItemDropShadow */
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     width: 160px;
     padding: 7px 8px;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+    padding: 10px 0;
   }
 `;
 

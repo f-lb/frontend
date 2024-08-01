@@ -76,7 +76,7 @@ export default function TodayReportPage() {
   const positiveVariance = 0;
 
   return (
-    <>
+    <Container>
       <Header>
         <Cover>
           <img src={AngryCover} alt="angry_cover" />
@@ -171,10 +171,10 @@ export default function TodayReportPage() {
 
         <Graph>
           <Header>
-            <h3>30일간의 어휘 변화</h3>
+            <h3>30일간의 변화</h3>
             <div>
-              <span>긍정적 단어</span>
-              <span>부정적단어</span>
+              <span>긍정 문장</span>
+              <span>부정 문장</span>
             </div>
           </Header>
           <Chart options={options} series={series} />
@@ -199,9 +199,14 @@ export default function TodayReportPage() {
 
         <LinkBtn>메인으로 가기</LinkBtn>
       </Main>
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  min-height: 100vh;
+  background: #fafafa;
+`;
 
 const Header = styled.header`
   position: relative;
