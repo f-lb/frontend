@@ -318,7 +318,6 @@ export default function MontlyModeCalendarPage() {
         ))}
       </Calendar>
       <RecordEmpty>
-        <span>2024-07-17</span>
         <Guide>
           <p>
             반가워요. <br />
