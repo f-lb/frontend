@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import RecordIcon from "../assets/record-icon.svg";
+import { getDatesByMon } from "../util";
+import { useRecoilValue } from "recoil";
+import { selectedMonthState } from "../recoil/atom";
 
 const mockDatas = [
   {
@@ -292,6 +295,8 @@ const mockDatas = [
 ];
 
 export default function MontlyModeCalendarPage() {
+  const selectedMonth = useRecoilValue(selectedMonthState);
+
   return (
     <>
       <WeeksBar>
@@ -304,7 +309,7 @@ export default function MontlyModeCalendarPage() {
         <li>토</li>
       </WeeksBar>
       <Calendar>
-        {mockDatas.map((data) => (
+        {getDatesByMon({ year: 2024, mon: selectedMonth }).map((data) => (
           <li style={{ position: "relative" }}>
             {data.today && <StatusBar />}
             <Date
@@ -312,7 +317,7 @@ export default function MontlyModeCalendarPage() {
               $isFuture={data.future}
               $color={data.color}
             >
-              {data.date}
+              {data > 0 && data}
             </Date>
           </li>
         ))}
@@ -324,10 +329,8 @@ export default function MontlyModeCalendarPage() {
             오늘의 빈칸을 채워볼까요?
           </p>
           <button>
-            <span>
-              기록하기
-            </span>
-            <img src={RecordIcon} alt="record icon"/>
+            <span>기록하기</span>
+            <img src={RecordIcon} alt="record icon" />
           </button>
         </Guide>
       </RecordEmpty>

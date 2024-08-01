@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import BackIcon from "../assets/back.svg";
-import { Link } from "react-router-dom";
-import ArrowIcon from "../assets/arrow-white.svg";
 
 const Day = ["", "월", "화", "수", "목", "금", "토", "일"];
 
