@@ -6,7 +6,7 @@ import CalendarSIcon02 from "../assets/calendar_s02.svg";
 import Filled_CalendarSIcon01 from "../assets/calendar_s01_filled.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
 import { useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import {  NavLink, Outlet } from "react-router-dom";
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState("monthlyMode");
@@ -21,9 +21,6 @@ export default function CalendarPage() {
         <DateCtrl>
           <YearCtrl>
             <div>2024</div>
-            <button>
-              <img src={ArrowIcon} alt="arrow icon" />
-            </button>
           </YearCtrl>
           <YearCtrl>
             <div>07</div>
