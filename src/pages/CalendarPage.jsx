@@ -6,10 +6,11 @@ import CalendarSIcon02 from "../assets/calendar_s02.svg";
 import Filled_CalendarSIcon01 from "../assets/calendar_s01_filled.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
 import { useState } from "react";
-import {  NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState("monthlyMode");
+  const [selectedMonth, setSelectedMonth] = useState();
 
   return (
     <Container>
@@ -20,13 +21,23 @@ export default function CalendarPage() {
       <CalendarCtrl>
         <DateCtrl>
           <YearCtrl>
-            <div>2024</div>
+            <h3>2024</h3>
           </YearCtrl>
           <YearCtrl>
-            <div>07</div>
-            <button>
-              <img src={ArrowIcon} alt="arrow icon" />
-            </button>
+            <Select>
+              <option>1월</option>
+              <option>2월</option>
+              <option>3월</option>
+              <option>4월</option>
+              <option>5월</option>
+              <option>6월</option>
+              <option>7월</option>
+              <option>8월</option>
+              <option>9월</option>
+              <option>10월</option>
+              <option>11월</option>
+              <option>12월</option>
+            </Select>
           </YearCtrl>
         </DateCtrl>
         <CalendarToggle>
@@ -94,8 +105,15 @@ const DateCtrl = styled.div`
 `;
 
 const YearCtrl = styled.div`
-  display: flex;
-  align-items: center;
+  h3 {
+    font-family: Pretendard;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23.6px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #111111;
+  }
 `;
 
 const CalendarToggle = styled.div`
@@ -121,4 +139,19 @@ const ToggleBtn = styled(NavLink)`
     ($isMonthlyMode
       ? "background-color: #a4bfed; border-right: 3px solid #bfbfbf; border-top-right-radius: 7px;border-bottom-right-radius: 7px;"
       : "background-color: #a4bfed; border-left: 3px solid #bfbfbf; border-top-left-radius: 7px; border-bottom-left-radius: 7px")}
+`;
+
+const Select = styled.select`
+  border: none;
+  //styleName: title/Md;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21.6px;
+  letter-spacing: -0.02em;
+  text-align: left;
+
+  &:focus {
+    outline: none;
+  }
 `;
