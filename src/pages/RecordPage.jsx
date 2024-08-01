@@ -1,29 +1,35 @@
 import styled from "styled-components";
 import BackIcon from "../assets/back.svg";
 import { Link } from "react-router-dom";
-import ArrowRightIcon from "../assets/arrowRight.svg";
+import ArrowIcon from "../assets/arrow-white.svg";
 
 const Day = ["", "월", "화", "수", "목", "금", "토", "일"];
 
 export default function RecordPage() {
   return (
     <>
-      <Nav>
-        <Link style={{ position: "absolute", left: "15px" }}>
-          <img src={BackIcon} alt="back_icon" />
-        </Link>
-        일기
-      </Nav>
+      <Nav>일기</Nav>
 
       <div>
         <Datepick>
           <h2>
-            <span>2024년 7월</span>
-            <img
-              style={{ color: "#fff" }}
-              src={ArrowRightIcon}
-              alt="arrow_right"
-            />
+            <span>
+              2024년{" "}
+              <Select>
+                <option>1월</option>
+                <option>2월</option>
+                <option>3월</option>
+                <option>4월</option>
+                <option>5월</option>
+                <option>6월</option>
+                <option>7월</option>
+                <option>8월</option>
+                <option>9월</option>
+                <option>10월</option>
+                <option>11월</option>
+                <option>12월</option>
+              </Select>
+            </span>
           </h2>
           <DateList>
             {new Array(31).fill().map((item, date) => (
@@ -127,7 +133,7 @@ const Date = styled.li`
 
 const RecordField = styled.div`
   background: #fff;
-  padding: 50px 20px;
+  padding: 50px 20px 100px;
   margin-top: -50px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -157,7 +163,7 @@ const RecordField = styled.div`
     padding: 10px;
     box-sizing: border-box;
 
-    height: 370px;
+    height: 40vh;
 
     &:focus {
       outline: none;
@@ -174,4 +180,20 @@ const Btn = styled.button`
   padding: 15px 0;
   border-radius: 8px;
   margin-top: 20px;
+`;
+
+const Select = styled.select`
+  border: none;
+  //styleName: title/Md;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 21.6px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  background: #222;
+  color: white;
+  &:focus {
+    outline: none;
+  }
 `;
