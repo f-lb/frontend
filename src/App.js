@@ -8,10 +8,7 @@ import LoadingPage from "./pages/LoadingPage";
 import SummeryPage from "./pages/SummeryPage"; // SummeryPage 가져오기
 import { lazy, Suspense } from "react";
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const TodayReportPageLazyed = lazy(async () => {
-  await delay(2000);
+const TodayReportPageLazyed = lazy(() => {
   return import("./pages/TodayReportPage");
 });
 
