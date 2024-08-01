@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
 import AngryCover from "../assets/cover-angry.svg";
