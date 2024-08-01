@@ -3,14 +3,22 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { selectedMonthState } from "../recoil/atom";
 import { getDatesByMon } from "../util";
+import { useEffect, useRef } from "react";
+import dayjs from "dayjs";
 
 export default function WeeklyModeCalendarPage() {
   const selectedMonth = useRecoilValue(selectedMonthState);
+  const scroll = useRef(null);
+
+  useEffect(() => {
+    if (selectedMonth !== dayjs().month() + 1) return;
+    scroll.current.scrollTop = (dayjs().date() - 1) * 100;
+  }, []);
 
   return (
-    <DateWithDiaries>
+    <DateWithDiaries ref={scroll}>
       {getDatesByMon({ year: 2024, mon: selectedMonth }).map((date) => {
-        if (date < 0) return;
+        if (date < 0) return <></>;
         return (
           <DateWithDiary>
             <DateAndDay>
@@ -42,7 +50,13 @@ export default function WeeklyModeCalendarPage() {
 }
 
 const DateWithDiaries = styled.ul`
-  padding-bottom: 80px;
+  padding-bottom: 60px;
+  height: 80vh;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const DateAndDay = styled.div`

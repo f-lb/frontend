@@ -1,8 +1,19 @@
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { selectedMonthState } from "../recoil/atom";
+import { getDatesByMon } from "../util";
+import dayjs from "dayjs";
+import { useState } from "react";
 
 const Day = ["", "월", "화", "수", "목", "금", "토", "일"];
 
 export default function RecordPage() {
+  const [selectedMonth, setSelectedMonth] = useRecoilState(selectedMonthState);
+  const [selectedDay, setSelectedDay] = useState(dayjs().date());
+
+  const handleMonthChange = (e) => {
+    setSelectedMonth(+e.target.value[0]);
+  };
   return (
     <>
       <Nav>일기</Nav>
@@ -12,29 +23,43 @@ export default function RecordPage() {
           <h2>
             <span>
               2024년{" "}
-              <Select>
-                <option>1월</option>
-                <option>2월</option>
-                <option>3월</option>
-                <option>4월</option>
-                <option>5월</option>
-                <option>6월</option>
-                <option>7월</option>
-                <option>8월</option>
-                <option>9월</option>
-                <option>10월</option>
-                <option>11월</option>
-                <option>12월</option>
+              <Select
+                onChange={handleMonthChange}
+                value={String(selectedMonth)}
+              >
+                <option value="1">1월</option>
+                <option value="2">2월</option>
+                <option value="3">3월</option>
+                <option value="4">4월</option>
+                <option value="5">5월</option>
+                <option value="6">6월</option>
+                <option value="7">7월</option>
+                <option value="8">8월</option>
+                <option value="9">9월</option>
+                <option value="10">10월</option>
+                <option value="11">11월</option>
+                <option value="12">12월</option>
               </Select>
             </span>
           </h2>
           <DateList>
-            {new Array(31).fill().map((item, date) => (
-              <Date $isActive={date === 6} $isToday={date + 1 === 10}>
-                <p>{date + 1}</p>
-                <span>월</span>
-              </Date>
-            ))}
+            {getDatesByMon({ year: 2024, mon: selectedMonth }).map(
+              (date) =>
+                date > 0 && (
+                  <Date
+                    style={{ cursor: "pointer" }}
+                    $isToday={
+                      date === dayjs().date() &&
+                      selectedMonth === dayjs().month() + 1
+                    }
+                    $isActive={date === selectedDay}
+                    onClick={() => setSelectedDay(date)}
+                  >
+                    <p>{date}</p>
+                    <span>월</span>
+                  </Date>
+                )
+            )}
           </DateList>
         </Datepick>
 
