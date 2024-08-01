@@ -5,10 +5,19 @@ import { ReactComponent as TodayIcon } from "../assets/today.svg";
 const FreeMode = () => {
   const date = new Date("2024-07-16");
   const title = "작업하면서 요아정 시켜먹기";
-  const subtitle = "놀람 가득했던";
+  const emotionKey = 1; // 놀람
   const dayofweek = "토요일";
   const content = `냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 또 먹어야징 냠냠 냠냠 냠냠 냠냠 냠냠 냠냠냠냠 냠냠 냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 또 먹어야징 냠냠 냠냠 냠냠 냠냠 냠냠 냠냠냠냠 냠냠냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다.  우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일`;
-  const emotions = ["놀라운", "행복한"];
+  const emotions = [1, 0]; // 놀람, 행복
+
+  const emotionDescriptions = {
+    0: { label: "행복", description: "기쁨 가득했던" },
+    1: { label: "놀람", description: "놀람 가득했던" },
+    2: { label: "분노", description: "화가났던" },
+    3: { label: "불안", description: "오싹했던" },
+    4: { label: "슬픔", description: "울적했던" },
+    5: { label: "중립", description: "평화로웠던" }
+  };
 
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -27,7 +36,7 @@ const FreeMode = () => {
       <Day>
         <DateText>
           {formatDate(date)}
-          <SubTitle>{subtitle} {dayofweek}</SubTitle>
+          <SubTitle>{emotionDescriptions[emotionKey].description} {dayofweek}</SubTitle>
         </DateText>
         {isToday(date) && (
           <TodayIconWrapper>
@@ -44,7 +53,7 @@ const FreeMode = () => {
           <Time>{date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</Time>
           <Emotions>
             {emotions.map((emotion, index) => (
-              <Emotion key={index}>#{emotion}</Emotion>
+              <Emotion key={index}>#{emotionDescriptions[emotion].label}</Emotion>
             ))}
           </Emotions>
         </DairyFooter>
