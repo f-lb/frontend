@@ -4,15 +4,38 @@ import { selectedMonthState } from "../recoil/atom";
 import { getDatesByMon } from "../util";
 import dayjs from "dayjs";
 import { useState } from "react";
+import { postDiary } from "../api/diaries";
+import { useNavigate } from "react-router";
 
 const Day = ["일", "월", "화", "수", "목", "금", "토"];
 
 export default function RecordPage() {
   const [selectedMonth, setSelectedMonth] = useRecoilState(selectedMonthState);
   const [selectedDay, setSelectedDay] = useState(dayjs().date());
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
   const handleMonthChange = (e) => {
     setSelectedMonth(+e.target.value[0]);
+  };
+
+  const handleSubmitDiary = async () => {
+    console.log(`2024-${selectedMonth}-${selectedDay}`);
+    const date = new window.Date(`2024-${selectedMonth}-${selectedDay + 1}`);
+    const formattedDate = date.toISOString().split(".")[0];
+    console.log("formattedDate:", formattedDate);
+    try {
+      await postDiary({
+        date: formattedDate,
+        title,
+        content,
+      });
+
+      navigate("/");
+    } catch (error) {
+      alert("일기작성에 실패하였습니다.");
+    }
   };
 
   return (
@@ -66,10 +89,16 @@ export default function RecordPage() {
         </Datepick>
 
         <RecordField>
-          <input placeholder="제목을 입력해주세요" />
-          <textarea placeholder="내용을 입력해주세요"></textarea>
+          <input
+            placeholder="제목을 입력해주세요"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <textarea
+            placeholder="내용을 입력해주세요"
+            onChange={(e) => setContent(e.target.value)}
+          ></textarea>
 
-          <Btn>일기 작성하기</Btn>
+          <Btn onClick={handleSubmitDiary}>일기 작성하기</Btn>
         </RecordField>
       </div>
     </>

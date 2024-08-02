@@ -20,8 +20,9 @@ export default function Signin() {
       });
 
       console.log(response.headers.authorization);
+      localStorage.setItem("accessToken", response.headers.authorization);
 
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       setErrorMessage("존재하지 않는 아이디 혹은 비밀번호입니다.");
     }
