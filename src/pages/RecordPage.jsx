@@ -5,7 +5,7 @@ import { getDatesByMon } from "../util";
 import dayjs from "dayjs";
 import { useState } from "react";
 
-const Day = ["", "월", "화", "수", "목", "금", "토", "일"];
+const Day = ["일", "월", "화", "수", "목", "금", "토"];
 
 export default function RecordPage() {
   const [selectedMonth, setSelectedMonth] = useRecoilState(selectedMonthState);
@@ -14,6 +14,7 @@ export default function RecordPage() {
   const handleMonthChange = (e) => {
     setSelectedMonth(+e.target.value[0]);
   };
+
   return (
     <>
       <Nav>일기</Nav>
@@ -55,7 +56,9 @@ export default function RecordPage() {
                     onClick={() => setSelectedDay(date)}
                   >
                     <p>{date}</p>
-                    <span>월</span>
+                    <span>
+                      {Day[dayjs(`${2024}-${selectedMonth}-${date}`).day()]}
+                    </span>
                   </Date>
                 )
             )}

@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { selectedMonthState } from "../recoil/atom";
 import { getDatesByMon } from "../util";
 import { useEffect, useRef } from "react";
 import dayjs from "dayjs";
+
+const Dayarr = ["일", "월", "화", "수", "목", "금", "토"];
 
 export default function WeeklyModeCalendarPage() {
   const selectedMonth = useRecoilValue(selectedMonthState);
@@ -22,7 +23,9 @@ export default function WeeklyModeCalendarPage() {
         return (
           <DateWithDiary>
             <DateAndDay>
-              <Day>일</Day>
+              <Day>
+                {Dayarr[dayjs(`${2024}-${selectedMonth}-${date}`).day()]}
+              </Day>
               <Date $color={"#ffb193"}>{date}</Date>
             </DateAndDay>
             <Diary>

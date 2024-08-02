@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
-import AngryCover from "../assets/cover-angry.svg";
+import AngryCover from "../assets/angeryCard.svg";
 import Chart from "react-apexcharts";
 import CommingSoon from "../assets/comming-soon.jpeg";
 import { Link } from "react-router-dom";
@@ -375,4 +375,3 @@ const StyledLinkButton = styled.div`
   border-radius: 8px;
   margin-top: 20px;
 `;
-

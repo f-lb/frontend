@@ -315,8 +315,13 @@ export default function MontlyModeCalendarPage() {
             {data === dayjs().date() &&
               selectedMonth === dayjs().month() + 1 && <StatusBar />}
             <Date
-              $isOutOfDate={data.outOfDate}
-              $isFuture={data.future}
+              $isFuture={
+                selectedMonth > dayjs().month() + 1
+                  ? true
+                  : selectedMonth === dayjs().month() + 1
+                  ? data >= dayjs().date()
+                  : false
+              }
               $color={data.color}
             >
               {data > 0 && data}
