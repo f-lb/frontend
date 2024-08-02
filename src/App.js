@@ -11,7 +11,7 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import SignupSuccess from "./pages/SignupSuccess";
 
-const delay = new Promise((resolve)=>setTimeout(resolve,2000))
+const delay = new Promise((resolve) => setTimeout(resolve, 2000));
 
 const TodayReportPageLazyed = lazy(async () => {
   await delay;
@@ -30,8 +30,8 @@ function App() {
             </Route>
             <Route path="/analyze" element={<AnalyzePage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/record" element={<RecordPage />} />
           </Route>
-          <Route path="/record" element={<RecordPage />} />
           <Route path="/summary" element={<SummeryPage />} />{" "}
           {/* SummeryPage 경로 추가 */}
           <Route path="signin" element={<Signin />} />

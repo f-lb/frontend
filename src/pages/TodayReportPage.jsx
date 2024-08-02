@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
-import AngryCover from "../assets/cover-angry.svg";
+import AngryCover from "../assets/angeryCard.svg";
 import Chart from "react-apexcharts";
 import CommingSoon from "../assets/comming-soon.jpeg";
 import { Link } from "react-router-dom";
+
 
 const series = [
   {
@@ -163,20 +164,20 @@ export default function TodayReportPage() {
             보면서 시간 보냈는데 어느새 자버린건지 눈떠보니 저녁이 됐다.
             저녁에는 나름 다이어트 해보겠다고 직접 요리했는데 망했다. 설탕 대신
             소금 넣은듯.. 아무튼 맛없었지만 재미는 있었다. 꾸역꾸역 먹고, 밤이
-            되어서야 컴퓨터 앞에 얹았는데 뭘 해야할지 너무 막막하고 집중도 잘
+            되어서야 컴퓨터 앞에 얹었는데 뭘 해야할지 너무 막막하고 집중도 잘
             안돼서 일기부터 쓴다. 매번 후회하는 날이 반복되니, 어떻게 해야 할지
             모르겠다. 암튼 오늘의 일기 끝.
           </p>
         </SentenceAnalysis>
 
         <Graph>
-          <Header>
+          <GraphHeader>
             <h3>30일간의 변화</h3>
             <div>
               <span>긍정 문장</span>
               <span>부정 문장</span>
             </div>
-          </Header>
+          </GraphHeader>
           <Chart options={options} series={series} />
         </Graph>
 
@@ -196,8 +197,9 @@ export default function TodayReportPage() {
             alt="comming_soon"
           />
         </div>
-
-        <LinkBtn>메인으로 가기</LinkBtn>
+        <Link to="/">
+          <StyledLinkButton>메인으로 가기</StyledLinkButton>
+        </Link>
       </Main>
     </Container>
   );
@@ -326,45 +328,45 @@ const Graph = styled.div`
   padding: 30px 0;
   margin: 0 -15px;
   padding: 20px;
+`;
 
-  ${Header} {
+const GraphHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  div {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 
-    div {
+    span {
+      //styleName: caption/graySm;
+      font-family: Pretendard;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 13.13px;
+      text-align: left;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 5px;
+      &:before {
+        content: " ";
+        display: block;
+        width: 15px;
+        height: 3px;
+        background: #ffdc72;
+      }
 
-      span {
-        //styleName: caption/graySm;
-        font-family: Pretendard;
-        font-size: 11px;
-        font-weight: 400;
-        line-height: 13.13px;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        gap: 5px;
+      &:last-child {
         &:before {
-          content: " ";
-          display: block;
-          width: 15px;
-          height: 3px;
-          background: #ffdc72;
-        }
-
-        &:last-child {
-          &:before {
-            background: #ffb199;
-          }
+          background: #ffb199;
         }
       }
     }
   }
 `;
 
-const LinkBtn = styled(Link)`
+const StyledLinkButton = styled.div`
   background: #000000;
   color: #fff;
   width: 100%;

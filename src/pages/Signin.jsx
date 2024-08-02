@@ -1,19 +1,55 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { postLogin } from "../api/auth";
+import { useState } from "react";
 
 export default function Signin() {
+  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formState.email === "" || formState.password === "") return;
+
+    try {
+      const response = await postLogin({
+        email: formState.email,
+        password: formState.password,
+      });
+
+      console.log(response.headers["Authorization"]);
+
+      // navigate("/");
+    } catch (error) {
+      setErrorMessage("존재하지 않는 아이디 혹은 비밀번호입니다.");
+    }
+  };
+
   return (
     <Container>
       <div></div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           style={{ marginBottom: "20px" }}
           type="email"
           placeholder="이메일을 입력해주세요"
+          onChange={(e) => {
+            setErrorMessage("");
+            setFormState({ ...formState, email: e.target.value });
+          }}
         />
-        <Input type="password" placeholder="비밀번호를 입력해주세요" />
+        <Input
+          type="password"
+          placeholder="비밀번호를 입력해주세요"
+          onChange={(e) => {
+            setErrorMessage("");
+            setFormState({ ...formState, password: e.target.value });
+          }}
+        />
 
-        <Error>error message</Error>
+        <Error>{errorMessage}</Error>
         <Btn>로그인</Btn>
       </form>
 

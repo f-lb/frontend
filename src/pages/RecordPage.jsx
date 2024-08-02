@@ -1,37 +1,67 @@
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import BackIcon from "../assets/back.svg";
-import { Link } from "react-router-dom";
-import ArrowRightIcon from "../assets/arrowRight.svg";
+import { selectedMonthState } from "../recoil/atom";
+import { getDatesByMon } from "../util";
+import dayjs from "dayjs";
+import { useState } from "react";
 
-const Day = ["", "월", "화", "수", "목", "금", "토", "일"];
+const Day = ["일", "월", "화", "수", "목", "금", "토"];
 
 export default function RecordPage() {
+  const [selectedMonth, setSelectedMonth] = useRecoilState(selectedMonthState);
+  const [selectedDay, setSelectedDay] = useState(dayjs().date());
+
+  const handleMonthChange = (e) => {
+    setSelectedMonth(+e.target.value[0]);
+  };
+
   return (
     <>
-      <Nav>
-        <Link style={{ position: "absolute", left: "15px" }}>
-          <img src={BackIcon} alt="back_icon" />
-        </Link>
-        일기
-      </Nav>
-
+      <Nav>일기</Nav>
       <div>
         <Datepick>
           <h2>
-            <span>2024년 7월</span>
-            <img
-              style={{ color: "#fff" }}
-              src={ArrowRightIcon}
-              alt="arrow_right"
-            />
+            <span>
+              2024년{" "}
+              <Select
+                onChange={handleMonthChange}
+                value={String(selectedMonth)}
+              >
+                <option value="1">1월</option>
+                <option value="2">2월</option>
+                <option value="3">3월</option>
+                <option value="4">4월</option>
+                <option value="5">5월</option>
+                <option value="6">6월</option>
+                <option value="7">7월</option>
+                <option value="8">8월</option>
+                <option value="9">9월</option>
+                <option value="10">10월</option>
+                <option value="11">11월</option>
+                <option value="12">12월</option>
+              </Select>
+            </span>
           </h2>
           <DateList>
-            {new Array(31).fill().map((item, date) => (
-              <Date $isActive={date === 6} $isToday={date + 1 === 10}>
-                <p>{date + 1}</p>
-                <span>월</span>
-              </Date>
-            ))}
+            {getDatesByMon({ year: 2024, mon: selectedMonth }).map(
+              (date) =>
+                date > 0 && (
+                  <Date
+                    style={{ cursor: "pointer" }}
+                    $isToday={
+                      date === dayjs().date() &&
+                      selectedMonth === dayjs().month() + 1
+                    }
+                    $isActive={date === selectedDay}
+                    onClick={() => setSelectedDay(date)}
+                  >
+                    <p>{date}</p>
+                    <span>
+                      {Day[dayjs(`${2024}-${selectedMonth}-${date}`).day()]}
+                    </span>
+                  </Date>
+                )
+            )}
           </DateList>
         </Datepick>
 
@@ -127,7 +157,7 @@ const Date = styled.li`
 
 const RecordField = styled.div`
   background: #fff;
-  padding: 50px 20px;
+  padding: 50px 20px 100px;
   margin-top: -50px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -157,7 +187,7 @@ const RecordField = styled.div`
     padding: 10px;
     box-sizing: border-box;
 
-    height: 370px;
+    height: 40vh;
 
     &:focus {
       outline: none;
@@ -174,4 +204,20 @@ const Btn = styled.button`
   padding: 15px 0;
   border-radius: 8px;
   margin-top: 20px;
+`;
+
+const Select = styled.select`
+  border: none;
+  //styleName: title/Md;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 21.6px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  background: #222;
+  color: white;
+  &:focus {
+    outline: none;
+  }
 `;

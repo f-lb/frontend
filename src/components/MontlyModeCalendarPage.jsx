@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import RecordIcon from "../assets/record-icon.svg";
-
+import { getDatesByMon } from "../util";
+import { useRecoilValue } from "recoil";
+import { selectedMonthState } from "../recoil/atom";
+import { Link } from "react-router-dom";
+import dayjs from "dayjs";
 const mockDatas = [
   {
     id: 0,
@@ -292,6 +296,8 @@ const mockDatas = [
 ];
 
 export default function MontlyModeCalendarPage() {
+  const selectedMonth = useRecoilValue(selectedMonthState);
+
   return (
     <>
       <WeeksBar>
@@ -304,15 +310,21 @@ export default function MontlyModeCalendarPage() {
         <li>토</li>
       </WeeksBar>
       <Calendar>
-        {mockDatas.map((data) => (
+        {getDatesByMon({ year: 2024, mon: selectedMonth }).map((data) => (
           <li style={{ position: "relative" }}>
-            {data.today && <StatusBar />}
+            {data === dayjs().date() &&
+              selectedMonth === dayjs().month() + 1 && <StatusBar />}
             <Date
-              $isOutOfDate={data.outOfDate}
-              $isFuture={data.future}
+              $isFuture={
+                selectedMonth > dayjs().month() + 1
+                  ? true
+                  : selectedMonth === dayjs().month() + 1
+                  ? data >= dayjs().date()
+                  : false
+              }
               $color={data.color}
             >
-              {data.date}
+              {data > 0 && data}
             </Date>
           </li>
         ))}
@@ -323,12 +335,12 @@ export default function MontlyModeCalendarPage() {
             반가워요. <br />
             오늘의 빈칸을 채워볼까요?
           </p>
-          <button>
-            <span>
-              기록하기
-            </span>
-            <img src={RecordIcon} alt="record icon"/>
-          </button>
+          <Link to="/record">
+            <button>
+              <span>기록하기</span>
+              <img src={RecordIcon} alt="record icon" />
+            </button>
+          </Link>
         </Guide>
       </RecordEmpty>
     </>

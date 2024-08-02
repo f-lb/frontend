@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import BellIcon from "../assets/bell.svg";
-import ArrowIcon from "../assets/arrow.svg";
 import CalendarSIcon01 from "../assets/calendar_s01.svg";
 import CalendarSIcon02 from "../assets/calendar_s02.svg";
 import Filled_CalendarSIcon01 from "../assets/calendar_s01_filled.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
 import { useState } from "react";
-import {  NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { selectedMonthState } from "../recoil/atom";
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState("monthlyMode");
+  const [selectedMonth, setSelectedMonth] = useRecoilState(selectedMonthState);
+
+  const handleMonthChange = (e) => {
+    setSelectedMonth(+e.target.value);
+  };
 
   return (
     <Container>
@@ -20,13 +26,23 @@ export default function CalendarPage() {
       <CalendarCtrl>
         <DateCtrl>
           <YearCtrl>
-            <div>2024</div>
+            <h3>2024</h3>
           </YearCtrl>
           <YearCtrl>
-            <div>07</div>
-            <button>
-              <img src={ArrowIcon} alt="arrow icon" />
-            </button>
+            <Select onChange={handleMonthChange} value={String(selectedMonth)}>
+              <option value="1">1월</option>
+              <option value="2">2월</option>
+              <option value="3">3월</option>
+              <option value="4">4월</option>
+              <option value="5">5월</option>
+              <option value="6">6월</option>
+              <option value="7">7월</option>
+              <option value="8">8월</option>
+              <option value="9">9월</option>
+              <option value="10">10월</option>
+              <option value="11">11월</option>
+              <option value="12">12월</option>
+            </Select>
           </YearCtrl>
         </DateCtrl>
         <CalendarToggle>
@@ -94,8 +110,15 @@ const DateCtrl = styled.div`
 `;
 
 const YearCtrl = styled.div`
-  display: flex;
-  align-items: center;
+  h3 {
+    font-family: Pretendard;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23.6px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #111111;
+  }
 `;
 
 const CalendarToggle = styled.div`
@@ -121,4 +144,19 @@ const ToggleBtn = styled(NavLink)`
     ($isMonthlyMode
       ? "background-color: #a4bfed; border-right: 3px solid #bfbfbf; border-top-right-radius: 7px;border-bottom-right-radius: 7px;"
       : "background-color: #a4bfed; border-left: 3px solid #bfbfbf; border-top-left-radius: 7px; border-bottom-left-radius: 7px")}
+`;
+
+const Select = styled.select`
+  border: none;
+  //styleName: title/Md;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21.6px;
+  letter-spacing: -0.02em;
+  text-align: left;
+
+  &:focus {
+    outline: none;
+  }
 `;
