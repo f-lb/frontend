@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ReactComponent as BackIcon } from "../assets/back.svg";
-import { ReactComponent as CorrectIcon } from "../assets/kebap.svg";
 import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
 
-const SummeryPage = ({ mode = "free" }) => {
+const SummaryPage = ({ mode = "free" }) => {
+  const { diaryId } = useParams();
+  console.log("SummaryPage diaryId:", diaryId); // diaryId를 로그로 출력해 확인
+
+  if (!diaryId) {
+    return <div>Error: diaryId is required</div>;
+  }
+
   return (
     <Container>
       <NavBar>
@@ -14,13 +20,10 @@ const SummeryPage = ({ mode = "free" }) => {
           <BackIcon />
         </Arrow>
         <NavTitle>일기</NavTitle>
-        <Correction>
-          <CorrectIcon />
-        </Correction>
       </NavBar>
       <Content>
         {mode === "free" ? (
-          <FreeMode />
+          <FreeMode diaryId={diaryId} />
         ) : (
           <TemplateMode />
         )}
@@ -137,4 +140,4 @@ const Button = styled(Link)`
   text-align: center;
 `;
 
-export default SummeryPage;
+export default SummaryPage;

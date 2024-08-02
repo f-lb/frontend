@@ -1,14 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as TodayIcon } from "../assets/today.svg";
+import { getDiaryById } from '../api/summary';
 
-const FreeMode = () => {
-  const date = new Date("2024-07-16");
-  const title = "작업하면서 요아정 시켜먹기";
-  const emotionKey = 1; // 놀람
-  const dayofweek = "토요일";
-  const content = `냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 또 먹어야징 냠냠 냠냠 냠냠 냠냠 냠냠 냠냠냠냠 냠냠 냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 또 먹어야징 냠냠 냠냠 냠냠 냠냠 냠냠 냠냠냠냠 냠냠냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘, 그래놀라, 미쯔 토핑 추가해서 먹었다.  우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일 우하하 정신놓고 먹다가 다 먹을뻔! 배부르당 >.0 내일`;
-  const emotions = [1, 0]; // 놀람, 행복
+const FreeMode = ({ diaryId }) => {
+  console.log(diaryId);
+  const [diary, setDiary] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!diaryId) {
+      console.error('diaryId is undefined');
+      setError(new Error('diaryId is required'));
+      setLoading(false);
+      return;
+    }
+
+    console.log(`Fetching diary with ID: ${diaryId}`);
+
+    (async () => {
+      try {
+        const result = await getDiaryById(diaryId);
+        setDiary(result);
+      } catch (error) {
+        console.error('Error fetching diary:', error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [diaryId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  // 데이터가 존재하는 경우에만 렌더링
+  if (!diary) return null;
+
+  const date = new Date(diary.createdDate);
+  const title = diary.title;
+  const emotionKey = diary.emotionType;
+  const dayofweek = date.toLocaleString('ko-KR', { weekday: 'long' });
+  const content = diary.content;
+  const emotions = [emotionKey];
 
   const emotionDescriptions = {
     0: { label: "행복", description: "기쁨 가득했던" },
@@ -50,7 +85,6 @@ const FreeMode = () => {
           <DairyContent>{content}</DairyContent>
         </DairyContentWrapper>
         <DairyFooter>
-          <Time>{date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</Time>
           <Emotions>
             {emotions.map((emotion, index) => (
               <Emotion key={index}>#{emotionDescriptions[emotion].label}</Emotion>
@@ -131,10 +165,7 @@ const DairyTitle = styled.div`
 `;
 
 const DairyContentWrapper = styled.div`
-  max-height: 330px;
-  overflow-y: auto;
-  padding-right: 10px; /* 패딩을 추가하여 스크롤 바가 본문을 가리지 않도록 조정 */
-  box-sizing: content-box; /* 패딩이 포함되지 않도록 조정 */
+  /* 스크롤 제거 */
 `;
 
 const DairyContent = styled.div`
@@ -154,12 +185,6 @@ const DairyFooter = styled.div`
  flex-direction: row;
   justify-content: space-between;
   width: 100%;
-`;
-
-const Time = styled.div`
-  font-size: 12px;
-  color: #888;
-  text-align: left;
 `;
 
 const Emotions = styled.div`
