@@ -35,10 +35,7 @@ export default function WeeklyModeCalendarPage() {
                 </p>
                 <div>
                   <span>16:24 PM</span>
-                  <Emotions>
-                    <Emotion $color={"#ff946d"} />
-                    <Emotion $color={"#FFE156"} />
-                  </Emotions>
+                  <Emotions>{/* <Emotion $color={"#ff946d"} /> */}</Emotions>
                 </div>
               </DiaryWrapper>
             </Diary>

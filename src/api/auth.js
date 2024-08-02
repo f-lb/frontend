@@ -1,7 +1,7 @@
 import axiosInstance from "./axios";
 
 const postSignup = async ({ email, password, name }) => {
-  const { data } = await axiosInstance.post("/auth/signup", {
+  const { data } = await axiosInstance.post("/members/join", {
     email,
     password,
     name,
@@ -11,7 +11,7 @@ const postSignup = async ({ email, password, name }) => {
 };
 
 const postLogin = async ({ email, password }) => {
-  const { data } = await axiosInstance.post("/auth/signin", {
+  const { data } = await axiosInstance.post("/members/login", {
     email,
     password,
   });

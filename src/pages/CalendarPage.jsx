@@ -14,7 +14,7 @@ export default function CalendarPage() {
   const [selectedMonth, setSelectedMonth] = useRecoilState(selectedMonthState);
 
   const handleMonthChange = (e) => {
-    setSelectedMonth(+e.target.value[0]);
+    setSelectedMonth(+e.target.value);
   };
 
   return (
