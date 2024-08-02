@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { ReactComponent as BackIcon } from "../assets/back.svg";
 import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
-import { getReports } from "../api/reports";
+// import { getReports } from "../api/reports";
 
 const SummaryPage = ({ mode = "free" }) => {
   const { diaryId } = useParams();
@@ -109,6 +109,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const Button = styled(Link)`
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
