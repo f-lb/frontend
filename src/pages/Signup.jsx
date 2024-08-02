@@ -1,8 +1,50 @@
 import styled from "styled-components";
 import BackIcon from "../assets/back.svg";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { postSignup } from "../api/auth";
 
 export default function Signup() {
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    password: "",
+    passwordCheck: "",
+  });
+
+  const [error, setError] = useState({
+    password: "",
+    passwordCheck: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, password, passwordCheck } = formState;
+
+    if (
+      name === "" ||
+      email === "" ||
+      password === "" ||
+      passwordCheck === ""
+    ) {
+      return;
+    }
+
+    if (password.length < 8) {
+      setError({ ...error, password: "8자 이상 입력해주세요." });
+    }
+
+    if (password !== passwordCheck) {
+      setError({ ...error, passwordCheck: "비밀번호가 일치하지 않습니다." });
+    }
+
+    try {
+      await postSignup({ name, email, password });
+    } catch (error) {
+      alert("이미 가입된 회원입니다.");
+    }
+  };
+
   return (
     <Container>
       <Nav>
@@ -12,24 +54,49 @@ export default function Signup() {
         회원가입
       </Nav>
 
-      <Form>
+      <Form onSubmit={handleSubmit}>
+        <div>
+          <label>닉네임</label>
+          <Input
+            placeholder="닉네임을 입력해주세요"
+            type="text"
+            onChange={(e) =>
+              setFormState({ ...formState, name: e.target.value })
+            }
+          />
+        </div>
         <div>
           <label>아이디 입력</label>
-          <Input placeholder="이메일을 입력해주세요" type="email" />
-          <Error>error message</Error>
+          <Input
+            placeholder="이메일을 입력해주세요"
+            type="email"
+            onChange={(e) =>
+              setFormState({ ...formState, email: e.target.value })
+            }
+          />
         </div>
         <div>
           <label>비밀번호 입력</label>
-          <Input placeholder="비밀번호를 입력해주세요" type="password" />
-          <Error>error message</Error>
+          <Input
+            placeholder="8자 이상 작성해주세요"
+            type="password"
+            onChange={(e) =>
+              setFormState({ ...formState, password: e.target.value })
+            }
+          />
+          <p></p>
+          <Error>{error.password}</Error>
         </div>
         <div>
           <label>비밀번호 확인</label>
           <Input
             placeholder="비밀번호를 다시한번 입력해주세요"
             type="password"
+            onChange={(e) =>
+              setFormState({ ...formState, passwordCheck: e.target.value })
+            }
           />
-          <Error>error message</Error>
+          <Error>{error.passwordCheck}</Error>
         </div>
 
         <Btn>회원가입</Btn>

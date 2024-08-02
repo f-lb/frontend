@@ -4,6 +4,7 @@ import { getDatesByMon } from "../util";
 import { useRecoilValue } from "recoil";
 import { selectedMonthState } from "../recoil/atom";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
 const mockDatas = [
   {
     id: 0,
@@ -311,7 +312,8 @@ export default function MontlyModeCalendarPage() {
       <Calendar>
         {getDatesByMon({ year: 2024, mon: selectedMonth }).map((data) => (
           <li style={{ position: "relative" }}>
-            {data.today && <StatusBar />}
+            {data === dayjs().date() &&
+              selectedMonth === dayjs().month() + 1 && <StatusBar />}
             <Date
               $isOutOfDate={data.outOfDate}
               $isFuture={data.future}
