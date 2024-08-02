@@ -1,12 +1,7 @@
 import axios from "axios";
 
-const host =
-  window.location.hostname === "localhost"
-    ? "http://http://43.201.49.70:8080/api"
-    : "api";
-
 const axiosInstance = axios.create({
-  baseURL: host,
+  baseURL: "https://main--radiant-brigadeiros-f8e731.netlify.app/api",
 });
 
 axiosInstance.interceptors.request.use((config) => {
