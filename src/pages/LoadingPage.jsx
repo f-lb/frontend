@@ -70,12 +70,17 @@ const spin = keyframes`
 
 const Container = styled.div`
   background-color: #fafafa;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
   display: flex;
   gap: 60px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
 `;
 
 const Title = styled.h2`

@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { postDiary } from "../api/diaries";
 import { useNavigate } from "react-router";
+import LoadingPage from "./LoadingPage";
 
 const Day = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -14,6 +15,7 @@ export default function RecordPage() {
   const [selectedDay, setSelectedDay] = useState(dayjs().date());
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleMonthChange = (e) => {
@@ -25,21 +27,24 @@ export default function RecordPage() {
     const date = new window.Date(`2024-${selectedMonth}-${selectedDay + 1}`);
     const formattedDate = date.toISOString().split(".")[0];
     console.log("formattedDate:", formattedDate);
+    setLoading(true);
     try {
-      await postDiary({
+      const { data } = await postDiary({
         date: formattedDate,
         title,
         content,
       });
-
-      navigate("/");
+      setLoading(false);
+      console.log(data);
+      navigate(`/today-report?data=${JSON.stringify(data)}`);
     } catch (error) {
       alert("일기작성에 실패하였습니다.");
     }
   };
 
   return (
-    <>
+    <Container>
+      {loading && <LoadingPage />}
       <Nav>일기</Nav>
       <div>
         <Datepick>
@@ -101,9 +106,13 @@ export default function RecordPage() {
           <Btn onClick={handleSubmitDiary}>일기 작성하기</Btn>
         </RecordField>
       </div>
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  position: relative;
+`;
 
 const Nav = styled.div`
   position: relative;

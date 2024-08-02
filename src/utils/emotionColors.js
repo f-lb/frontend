@@ -1,16 +1,9 @@
-// import happyCard from "../assets/happyCard.svg";
-// import surprisedCard from "../assets/surprisedCard.svg";
-// import anxietyCard from "../assets/anxietyCard.svg";
-// import angryCard from "../assets/angeryCard.svg";
-// import sadCard from "../assets/sadCard.svg";
-// import neutralCard from "../assets/neutralCard.svg";
-
-// import happinessHighlight from "../assets/happinessHighlight.svg";
-// import surprisedHighlight from "../assets/surprisedHighlight.svg";
-// import anxietyHighlight from "../assets/anxietyHighlight.svg";
-// import angerHighlight from "../assets/angerHighlight.svg";
-// import sadnessHighlight from "../assets/sadnessHighlight.svg";
-// import neutralHighlight from "../assets/neutralHighlight.svg";
+import happyCard from "../assets/happyCard.svg";
+import surprisedCard from "../assets/surprisedCard.svg";
+import anxietyCard from "../assets/anxietyCard.svg";
+import angryCard from "../assets/angeryCard.svg";
+import sadCard from "../assets/sadCard.svg";
+import neutralCard from "../assets/neutralCard.svg";
 
 // const emotionColors = {
 //   0: {
@@ -37,7 +30,7 @@
 //   3: {
 //     color: "#A9E295",
 //     imageUrl: anxietyCard,
-//     name: "불안했던",
+//     name: "불안",
 //     highlightUrl: anxietyHighlight,
 //   },
 //   4: {
@@ -73,4 +66,38 @@ const getColors = (color) => {
   }
 };
 
-export { getColors };
+const getEmotion = (type) => {
+  switch (type) {
+    case 0:
+      return "기쁨";
+    case 1:
+      return "놀람";
+    case 2:
+      return "화남";
+    case 3:
+      return "불안";
+    case 4:
+      return "슬픔";
+    default:
+      return "중립";
+  }
+};
+
+const getCover = (type) => {
+  switch (type) {
+    case 0:
+      return happyCard;
+    case 1:
+      return surprisedCard;
+    case 2:
+      return angryCard;
+    case 3:
+      return anxietyCard;
+    case 4:
+      return sadCard;
+    default:
+      return neutralCard;
+  }
+};
+
+export { getColors, getEmotion, getCover };

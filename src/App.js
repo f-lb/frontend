@@ -38,11 +38,11 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="signup-success" element={<SignupSuccess />} />
         </Routes>
-        <Suspense fallback={<LoadingPage />}>
-          <Routes>
-            <Route path="/today-report" element={<TodayReportPageLazyed />} />
-          </Routes>
-        </Suspense>
+        {/* <Suspense fallback={<LoadingPage />}> */}
+        <Routes>
+          <Route path="/today-report" element={<TodayReportPageLazyed />} />
+        </Routes>
+        {/* </Suspense> */}
       </BrowserRouter>
     </RootLayout>
   );
