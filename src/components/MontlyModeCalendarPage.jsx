@@ -8,10 +8,13 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { getDiariesByMonth } from "../api/diaries";
 import { getColors } from "../utils/emotionColors";
+import DairySummary from "./DiarySummary";
 
 export default function MontlyModeCalendarPage() {
   const selectedMonth = useRecoilValue(selectedMonthState);
   const [diaries, setDiaries] = useState({});
+  const [isClicked, setIsClicked] = useState(null);
+
   const navigate = useNavigate();
   console.log("diaries:", diaries);
   useEffect(() => {
@@ -83,6 +86,18 @@ export default function MontlyModeCalendarPage() {
             <Date
               $isFuture={data > 0 ? true : false}
               $color={data in diaries ? diaries[data].color : ""}
+              onClick={() => {
+                if (data in diaries) {
+                  setIsClicked({
+                    createdDate: diaries[data].createdDate,
+                    color: diaries[data].color,
+                    title: diaries[data].title,
+                    diaryId: diaries[data].diaryId,
+                  });
+                } else {
+                  setIsClicked(null);
+                }
+              }}
             >
               {data > 0 && data}
             </Date>
@@ -90,18 +105,28 @@ export default function MontlyModeCalendarPage() {
         ))}
       </Calendar>
       <RecordEmpty>
-        <Guide>
-          <p>
-            반가워요. <br />
-            오늘의 빈칸을 채워볼까요?
-          </p>
-          <Link to="/record">
-            <button>
-              <span>기록하기</span>
-              <img src={RecordIcon} alt="record icon" />
-            </button>
+        {isClicked === null ? (
+          <Guide>
+            <p>
+              반가워요. <br />
+              오늘의 빈칸을 채워볼까요?
+            </p>
+            <Link to="/record">
+              <button>
+                <span>기록하기</span>
+                <img src={RecordIcon} alt="record icon" />
+              </button>
+            </Link>
+          </Guide>
+        ) : (
+          <Link to={`/summary/${isClicked.diaryId}`}>
+            <DairySummary
+              title={isClicked.title}
+              createdDate={isClicked.createdDate}
+              color={isClicked.color}
+            />
           </Link>
-        </Guide>
+        )}
       </RecordEmpty>
     </>
   );
