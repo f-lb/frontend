@@ -2,13 +2,16 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { selectedMonthState } from "../recoil/atom";
 import { getDatesByMon } from "../util";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
+import { getDiariesByMonth } from "../api/diaries";
+import { getColors } from "../utils/emotionColors";
 
 const Dayarr = ["일", "월", "화", "수", "목", "금", "토"];
 
 export default function WeeklyModeCalendarPage() {
   const selectedMonth = useRecoilValue(selectedMonthState);
+  const [diaries, setDiaries] = useState({});
   const scroll = useRef(null);
 
   useEffect(() => {
@@ -16,34 +19,85 @@ export default function WeeklyModeCalendarPage() {
     scroll.current.scrollTop = (dayjs().date() - 1) * 100;
   }, []);
 
+  useEffect(() => {
+    setDiaries({});
+    (async () => {
+      try {
+        const { data } = await getDiariesByMonth({ month: selectedMonth });
+
+        // Create a new diaries object based on the fetched data
+        const newDiaries = data.reduce((acc, item) => {
+          acc[dayjs(item.createdDate).date()] = {
+            title: item.title,
+            contents: item.contents,
+            diaryId: item.diaryId,
+            createdDate: item.createdDate,
+            color: getColors(item.totalEmotion),
+          };
+          return acc;
+        }, {});
+
+        // Update the state with the new diaries object
+        setDiaries((prevDiaries) => ({
+          ...prevDiaries,
+          ...newDiaries,
+        }));
+      } catch (error) {
+        console.error("Error fetching diaries:", error);
+      }
+    })();
+  }, [selectedMonth]);
+
   return (
     <DateWithDiaries ref={scroll}>
       {getDatesByMon({ year: 2024, mon: selectedMonth }).map((date) => {
         if (date < 0) return <></>;
-        return (
-          <DateWithDiary>
-            <DateAndDay>
-              <Day>
-                {Dayarr[dayjs(`${2024}-${selectedMonth}-${date}`).day()]}
-              </Day>
-              <Date $color={"#ffb193"}>{date}</Date>
-            </DateAndDay>
-            <Diary>
-              <DiaryWrapper style={{ borderBottom: "1px solid #c5c5c5" }}>
-                <h2>작업하면서 요아정 시켜먹기</h2>
-                <p>
-                  냠냠 요아정 짱 맛있다. 혼자서 아이스크림 2인분에 초코쉘,
-                  그래놀라, 미쯔 토핑 추가해서 먹었다. 우하하 정신놓고 먹었어
-                  맛이 있었어
-                </p>
-                <div>
-                  <span>16:24 PM</span>
-                  <Emotions>{/* <Emotion $color={"#ff946d"} /> */}</Emotions>
-                </div>
-              </DiaryWrapper>
-            </Diary>
-          </DateWithDiary>
-        );
+
+        if (date in diaries) {
+          return (
+            <DateWithDiary>
+              <DateAndDay>
+                <Day>
+                  {Dayarr[dayjs(`${2024}-${selectedMonth}-${date}`).day()]}
+                </Day>
+                <Date $color={diaries[date].color}>{date}</Date>
+              </DateAndDay>
+              <Diary>
+                <DiaryWrapper>
+                  <h2>{diaries[date].title}</h2>
+                  <p>{diaries[date].contents}</p>
+                  <div>
+                    <span>16:24 PM</span>
+                    <Emotions>{/* <Emotion $color={"#ff946d"} /> */}</Emotions>
+                  </div>
+                </DiaryWrapper>
+              </Diary>
+            </DateWithDiary>
+          );
+        } else {
+          return (
+            <DateWithDiary>
+              <DateAndDay>
+                <Day>
+                  {Dayarr[dayjs(`${2024}-${selectedMonth}-${date}`).day()]}
+                </Day>
+                <Date $color={"#fff"}>{date}</Date>
+              </DateAndDay>
+              <Diary>
+                <DiaryWrapper>
+                  <h2>
+                    반가워요!
+                    <br />
+                    오늘의 빈칸을 채워볼까요?
+                  </h2>
+                  <LinkToPostContainer>
+                    <LinkToPost>일기 작성하고 분석받기 {">"}</LinkToPost>
+                  </LinkToPostContainer>
+                </DiaryWrapper>
+              </Diary>
+            </DateWithDiary>
+          );
+        }
       })}
     </DateWithDiaries>
   );
@@ -68,6 +122,8 @@ const Diary = styled.div`
   height: 100px;
   padding: 10px 10px 0px 0;
   flex-grow: 1;
+
+  border-bottom: 1px solid #c5c5c5;
 `;
 
 const DateWithDiary = styled.li`
@@ -108,10 +164,19 @@ const Day = styled.div`
   background-color: #fff;
   padding-left: 20px;
   padding: 5px 0 5px 20px;
+
+  border-top: 1px solid #c5c5c5;
+
+  // &:first-child {
+  //   border: none;
+  // }
 `;
 
 const DiaryWrapper = styled.div`
-  padding-bottom: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
   h2 {
     //styleName: subtitle/Sm;
     font-family: Pretendard;
@@ -158,18 +223,6 @@ const Emotions = styled.div`
   gap: 3px;
 `;
 
-const Emotion = styled.div`
-  background-color: ${({ $color }) => $color};
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-`;
-
-const LinkToPostWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const LinkToPost = styled.div`
   text-decoration: underline;
   //styleName: caption/graySm;
@@ -179,12 +232,15 @@ const LinkToPost = styled.div`
   line-height: 13.13px;
   text-align: left;
   color: #363636;
+  margin-top: auto;
+  padding-bottom: 10px;
 `;
 
 const LinkToPostContainer = styled.div`
   display: flex !important;
   justify-content: flex-end !important;
   flex-grow: 1;
+  margin-top: auto;
   a {
     margin-top: 20px;
     margin-bottom: 0;

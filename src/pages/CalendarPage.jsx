@@ -8,6 +8,7 @@ import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { selectedMonthState } from "../recoil/atom";
+import LogoIcon from "../assets/logo.svg";
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState("monthlyMode");
@@ -20,7 +21,9 @@ export default function CalendarPage() {
   return (
     <Container>
       <Header>
-        <h1>Fl!B</h1>
+        <h1>
+          <img src={LogoIcon} alt="logo" />
+        </h1>
         <img src={BellIcon} alt="bell icon" />
       </Header>
       <CalendarCtrl>

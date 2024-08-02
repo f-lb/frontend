@@ -3,8 +3,11 @@ import RecordIcon from "../assets/record-icon.svg";
 import { getDatesByMon } from "../util";
 import { useRecoilValue } from "recoil";
 import { selectedMonthState } from "../recoil/atom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { useEffect, useRef, useState } from "react";
+import { getDiariesByMonth } from "../api/diaries";
+import emotionColors, { getColors } from "../utils/emotionColors";
 const mockDatas = [
   {
     id: 0,
@@ -297,6 +300,58 @@ const mockDatas = [
 
 export default function MontlyModeCalendarPage() {
   const selectedMonth = useRecoilValue(selectedMonthState);
+  const [diaries, setDiaries] = useState({});
+  const navigate = useNavigate();
+  console.log("diaries:", diaries);
+  useEffect(() => {
+    setDiaries({});
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/signin");
+      return;
+    }
+    // (async () => {
+    //   const { data } = await getDiariesByMonth({ month: selectedMonth });
+    //   console.log("data:", data);
+    //   data.map((item) => {
+    //     setDiaries({
+    //       ...diaries,
+    //       [dayjs(item.createdDate).date()]: {
+    //         title: item.title,
+    //         contents: item.contents,
+    //         diaryId: item.diaryId,
+    //         color: getColors(item.totalEmotion),
+    //       },
+    //     });
+    //   });
+    // })();
+
+    (async () => {
+      try {
+        const { data } = await getDiariesByMonth({ month: selectedMonth });
+        console.log("data:", data);
+
+        // Create a new diaries object based on the fetched data
+        const newDiaries = data.reduce((acc, item) => {
+          acc[dayjs(item.createdDate).date()] = {
+            title: item.title,
+            contents: item.contents,
+            diaryId: item.diaryId,
+            createdDate: item.createdDate,
+            color: getColors(item.totalEmotion),
+          };
+          return acc;
+        }, {});
+
+        // Update the state with the new diaries object
+        setDiaries((prevDiaries) => ({
+          ...prevDiaries,
+          ...newDiaries,
+        }));
+      } catch (error) {
+        console.error("Error fetching diaries:", error);
+      }
+    })();
+  }, [selectedMonth]);
 
   return (
     <>
@@ -315,14 +370,8 @@ export default function MontlyModeCalendarPage() {
             {data === dayjs().date() &&
               selectedMonth === dayjs().month() + 1 && <StatusBar />}
             <Date
-              $isFuture={
-                selectedMonth > dayjs().month() + 1
-                  ? true
-                  : selectedMonth === dayjs().month() + 1
-                  ? data >= dayjs().date()
-                  : false
-              }
-              $color={data.color}
+              $isFuture={data > 0 ? true : false}
+              $color={data in diaries ? diaries[data].color : ""}
             >
               {data > 0 && data}
             </Date>
