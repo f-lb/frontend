@@ -1,9 +1,9 @@
-import happyCard from "../assets/happyCard.svg";
-import surprisedCard from "../assets/surprisedCard.svg";
-import anxietyCard from "../assets/anxietyCard.svg";
-import angryCard from "../assets/angeryCard.svg";
-import sadCard from "../assets/sadCard.svg";
-import neutralCard from "../assets/neutralCard.svg";
+import happyCard from "../assets/happyCard.png";
+import surprisedCard from "../assets/surprisedCard.png";
+import anxietyCard from "../assets/anxietyCard.png";
+import angryCard from "../assets/angryCard.png";
+import sadCard from "../assets/sadCard.png";
+import neutralCard from "../assets/neutralCard.png";
 
 // const emotionColors = {
 //   0: {
