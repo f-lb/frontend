@@ -72,29 +72,6 @@ const Day = styled.span`
   margin-right: 4px;
 `;
 
-const Time = styled.span`
-  box-sizing: border-box;
-  color: #8a8a8a;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-`;
-
-const Today = styled.span`
-  box-sizing: border-box;
-  color: #404040;
-  background-color: #ffe156;
-  font-family: Stick;
-  font-size: 12px; /* 폰트 크기 조정 */
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  border-radius: 8px;
-  padding: 2px 4px; /* 패딩 추가 */
-`;
-
 const Point = styled.div`
   box-sizing: border-box;
   display: flex;
