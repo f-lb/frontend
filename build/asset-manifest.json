@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.50164472.css",
-    "main.js": "/static/js/main.f9a564a4.js",
-    "static/js/603.58395053.chunk.js": "/static/js/603.58395053.chunk.js",
+    "main.js": "/static/js/main.f88a3ce2.js",
+    "static/js/603.a8300e4c.chunk.js": "/static/js/603.a8300e4c.chunk.js",
     "static/js/453.a228838d.chunk.js": "/static/js/453.a228838d.chunk.js",
     "static/js/19.ddd8079d.chunk.js": "/static/js/19.ddd8079d.chunk.js",
     "static/media/StickRegular.ttf": "/static/media/StickRegular.557c3b685025af5c06bf.ttf",
@@ -19,6 +19,7 @@
     "static/media/profile_img.svg": "/static/media/profile_img.61da63d0f867a48c612d95c10adc262c.svg",
     "static/media/comming-soon.jpeg": "/static/media/comming-soon.4565d1b2afd5cef20c8c.jpeg",
     "static/media/Frame 550.svg": "/static/media/Frame 550.434e94a054b40ce7306e850b6600b252.svg",
+    "static/media/logoImg.png": "/static/media/logoImg.45084908cd78f9be315a.png",
     "static/media/today.svg": "/static/media/today.34cec177373043502fa674114f403342.svg",
     "static/media/basic.svg": "/static/media/basic.2a8e24a7c7cd4e7f417df781ddad4dde.svg",
     "static/media/calendar_s01.svg": "/static/media/calendar_s01.3897402c4e835d5e0f650d642d46be9e.svg",
@@ -42,13 +43,13 @@
     "static/media/new.svg": "/static/media/new.c64a94b6df7477b340f44179e68e989d.svg",
     "static/media/arrowRight.svg": "/static/media/arrowRight.621aaf680dc1a70a2f18982e0c332aaa.svg",
     "main.50164472.css.map": "/static/css/main.50164472.css.map",
-    "main.f9a564a4.js.map": "/static/js/main.f9a564a4.js.map",
-    "603.58395053.chunk.js.map": "/static/js/603.58395053.chunk.js.map",
+    "main.f88a3ce2.js.map": "/static/js/main.f88a3ce2.js.map",
+    "603.a8300e4c.chunk.js.map": "/static/js/603.a8300e4c.chunk.js.map",
     "453.a228838d.chunk.js.map": "/static/js/453.a228838d.chunk.js.map",
     "19.ddd8079d.chunk.js.map": "/static/js/19.ddd8079d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.50164472.css",
-    "static/js/main.f9a564a4.js"
+    "static/js/main.f88a3ce2.js"
   ]
 }
