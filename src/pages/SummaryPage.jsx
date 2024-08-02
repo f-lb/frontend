@@ -22,11 +22,7 @@ const SummaryPage = ({ mode = "free" }) => {
         <NavTitle>일기</NavTitle>
       </NavBar>
       <Content>
-        {mode === "free" ? (
-          <FreeMode diaryId={diaryId} />
-        ) : (
-          <TemplateMode />
-        )}
+        {mode === "free" ? <FreeMode diaryId={diaryId} /> : <TemplateMode />}
       </Content>
       <ButtonWrapper>
         <Button>마음 리포트 보러가기</Button>
@@ -68,23 +64,6 @@ const Arrow = styled.div`
   top: 4px;
   cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const Correction = styled.div`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  position: absolute;
-  right: 12px;
-  top: 4px;
-  cursor: pointer;
   justify-content: center;
   align-items: center;
 

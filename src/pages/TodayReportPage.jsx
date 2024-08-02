@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
 import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
-import AngryCover from "../assets/angeryCard.svg";
 import Chart from "react-apexcharts";
 import CommingSoon from "../assets/comming-soon.jpeg";
 import { Link, useSearchParams } from "react-router-dom";
 import dayjs from "dayjs";
 import CalendarIcon from "../assets/report-calendar-icon.svg";
 import { getColors, getCover, getEmotion } from "../utils/emotionColors";
-
-const SERIES = [
-  {
-    data: [30],
-  },
-  {
-    data: [10],
-  },
-];
 
 const OPTIONS = {
   chart: {
@@ -72,8 +62,10 @@ const OPTIONS = {
 const Day = ["일", "월", "화", "수", "목", "금", "토"];
 
 export default function TodayReportPage() {
+  // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState(JSON.parse(searchParams.get("data")));
   const [options, setOptions] = useState(OPTIONS);
   const [pSeries, setPSeries] = useState({});
@@ -101,6 +93,7 @@ export default function TodayReportPage() {
       data: mData.map((data) => data.negativeEmotionPercent),
       name: "부정",
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
