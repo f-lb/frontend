@@ -5,7 +5,7 @@ import { BnbLayout, RootLayout } from "./layouts";
 import MontlyModeCalendarPage from "./components/MontlyModeCalendarPage";
 import WeeklyModeCalendarPage from "./components/WeeklyModeCalendarPage";
 import LoadingPage from "./pages/LoadingPage";
-import SummeryPage from "./pages/SummeryPage"; // SummeryPage 가져오기
+import SummaryPage from "./pages/SummaryPage"; // SummaryPage 가져오기
 import { lazy, Suspense } from "react";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -32,17 +32,17 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/record" element={<RecordPage />} />
           </Route>
-          <Route path="/summary" element={<SummeryPage />} />{" "}
-          {/* SummeryPage 경로 추가 */}
+          <Route path="/summary/:diaryId" element={<SummaryPage />} />{" "}
+          {/* SummaryPage 경로 수정 */}
           <Route path="signin" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
           <Route path="signup-success" element={<SignupSuccess />} />
         </Routes>
-        <Suspense fallback={<LoadingPage />}>
-          <Routes>
-            <Route path="/today-report" element={<TodayReportPageLazyed />} />
-          </Routes>
-        </Suspense>
+        {/* <Suspense fallback={<LoadingPage />}> */}
+        <Routes>
+          <Route path="/today-report" element={<TodayReportPageLazyed />} />
+        </Routes>
+        {/* </Suspense> */}
       </BrowserRouter>
     </RootLayout>
   );

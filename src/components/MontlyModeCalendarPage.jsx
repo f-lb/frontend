@@ -328,7 +328,6 @@ export default function MontlyModeCalendarPage() {
     (async () => {
       try {
         const { data } = await getDiariesByMonth({ month: selectedMonth });
-        console.log("data:", data);
 
         // Create a new diaries object based on the fetched data
         const newDiaries = data.reduce((acc, item) => {

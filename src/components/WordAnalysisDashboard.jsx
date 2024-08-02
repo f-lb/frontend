@@ -20,29 +20,9 @@ const GlobalStyle = createGlobalStyle`
 
 const WordAnalysisDashboard = ({
   totalSentences,
-  negativeSentences,
-  positiveSentences,
-  yesterdayNegativePercent,
-  negativeVariance,
-  positiveVariance,
+  negativePercent,
+  positivePercent,
 }) => {
-  const negativePercent = ((negativeSentences / totalSentences) * 100).toFixed(
-    1
-  );
-  const positivePercent = ((positiveSentences / totalSentences) * 100).toFixed(
-    1
-  );
-
-  const renderVariance = (variance) => {
-    if (variance === 0) {
-      return <StyledSpan>-</StyledSpan>;
-    } else if (variance > 0) {
-      return <StyledSpan>↑ {variance}</StyledSpan>;
-    } else {
-      return <StyledSpan>↓ {Math.abs(variance)}</StyledSpan>;
-    }
-  };
-
   return (
     <Container>
       <GlobalStyle />
@@ -56,19 +36,15 @@ const WordAnalysisDashboard = ({
           <CellHeader>긍정 문장</CellHeader>
           <Cell>{totalSentences}</Cell>
           <Cell>
-            <NegativeValue>
-              {negativePercent}% {renderVariance(negativeVariance)}
-            </NegativeValue>
+            <NegativeValue>{negativePercent}%</NegativeValue>
             <SubText>
-              {negativeSentences} / {totalSentences}
+              {(negativePercent * totalSentences) / 100} / {totalSentences}
             </SubText>
           </Cell>
           <Cell>
-            <PositiveValue>
-              {positivePercent}% {renderVariance(positiveVariance)}
-            </PositiveValue>
+            <PositiveValue>{positivePercent}%</PositiveValue>
             <SubText>
-              {positiveSentences} / {totalSentences}
+              {(positivePercent * totalSentences) / 100} / {totalSentences}
             </SubText>
           </Cell>
         </Grid>

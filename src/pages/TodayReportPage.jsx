@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import WordAnalysisDashboard from "../components/WordAnalysisDashboard";
 import styled from "styled-components";
 import AngryCover from "../assets/angeryCard.svg";
 import Chart from "react-apexcharts";
 import CommingSoon from "../assets/comming-soon.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import dayjs from "dayjs";
+import CalendarIcon from "../assets/report-calendar-icon.svg";
+import { getColors, getCover, getEmotion } from "../utils/emotionColors";
 
-
-const series = [
+const SERIES = [
   {
-    data: [30, 40, 45, 50, 49, 60, 70, 91],
+    data: [30],
   },
   {
-    data: [10, 20, 95, 40, 29, 60, 60, 91],
+    data: [10],
   },
 ];
 
-const options = {
+const OPTIONS = {
   chart: {
     toolbar: {
       show: false,
@@ -37,7 +39,7 @@ const options = {
     },
   },
   xaxis: {
-    categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+    categories: [],
   },
   yaxis: [
     {
@@ -67,107 +69,130 @@ const options = {
   },
 };
 
+const Day = ["일", "월", "화", "수", "목", "금", "토"];
+
 export default function TodayReportPage() {
-  // 더미 데이터 설정
-  const totalSentences = 38;
-  const negativeSentences = 5;
-  const positiveSentences = 2;
-  const yesterdayNegativePercent = 8.7;
-  const negativeVariance = -2;
-  const positiveVariance = 0;
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [data, setData] = useState(JSON.parse(searchParams.get("data")));
+  const [options, setOptions] = useState(OPTIONS);
+  const [pSeries, setPSeries] = useState({});
+  const [nSeries, setNSeries] = useState({});
+
+  console.log("data:", data.monthlyEmotionResponse);
+
+  useEffect(() => {
+    const mData = data.monthlyEmotionResponse.sort((a, b) =>
+      dayjs(a.createdDate).diff(b.createdDate)
+    );
+
+    setOptions({
+      ...options,
+      xaxis: {
+        categories: mData.map((data) => data.createdDate),
+      },
+    });
+
+    setPSeries({
+      data: mData.map((data) => data.positiveEmotionPercent),
+      name: "긍정",
+    });
+    setNSeries({
+      data: mData.map((data) => data.negativeEmotionPercent),
+      name: "부정",
+    });
+  }, []);
 
   return (
     <Container>
       <Header>
         <Cover>
-          <img src={AngryCover} alt="angry_cover" />
+          <img
+            width={10}
+            src={getCover(data.totalEmotionType)}
+            alt="angry_cover"
+          />
         </Cover>
         <Headings>
           <Title>
             <span>Today</span>
             <p>마음 리포트</p>
           </Title>
-          <p>2024-07-26-목 / 16:38</p>
+          <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+            <img src={CalendarIcon} alt="calendar icon" />
+            <p style={{ marginBottom: "-4px" }}>
+              2024-{dayjs(data.createdDate).month() + 1}-
+              {dayjs(data.createdDate).date()}-
+              {Day[dayjs(data.createdDate).day()]}
+            </p>
+          </div>
         </Headings>
       </Header>
       <Main>
-        <h2>
+        <h2 style={{ margin: "15px 0" }}>
           민성님은 오늘
           <br />
-          분노 42%
+          <span style={{ color: getColors(data.totalEmotionType) }}>
+            {getEmotion(data.totalEmotionType)}
+          </span>{" "}
+          <span>{data.totalEmotionPercent}%</span>
         </h2>
-        <p>
-          분노는 우리가 자주 느끼는 자연스러운 감정입니다. 우선, 자신의 분노를
-          인정하고 그 감정을 받아들이세요. 감정을 억누르기보다는, 왜 그런 감정을
-          느끼는지 이해하는 것이 중요합니다.
-          <br /> 분노를 표현할 때는 공격적인 방식 대신, 차분하고 건설적인
-          방식으로 표현해보세요. “나는 지금 화가 나”라고 솔직하게 말하는 것이
-          좋습니다.
-          <br /> 분노의 원인을 분석해보세요. 어떤 상황에서, 누구에게, 왜 화가
-          났는지를 구체적으로 생각해보면 문제를 해결하는 데 도움이 됩니다.
-          <br /> 마지막으로, 자신을 너무 심각하게 여기지 말고 가벼운 마음으로
-          상황을 바라보세요. 유머를 통해 긴장을 풀거나, 긍정적인 면을 찾으려는
-          노력이 분노를 완화하는 데 도움이 될 수 있습니다.
-        </p>
+        <p style={{ marginBottom: "15px" }}>{data.feedback}</p>
 
         <EmotionDistribution>
           <h2>오늘의 감정 분포도</h2>
           <ul>
             <li>
               <h3>분노</h3>
-              <GraphItem $percent={100} $color="#ff946d" />
+              <GraphItem $percent={data.emotions.anger} $color="#ff946d" />
+              <Percent>{data.emotions.anger}%</Percent>
             </li>
             <li>
               <h3>놀람</h3>
-              <GraphItem $percent={42} $color="#faa3e0" />
+              <GraphItem $percent={data.emotions.surprised} $color="#faa3e0" />
+              <Percent>{data.emotions.surprised}%</Percent>
             </li>
             <li>
-              <h3>불쾌감</h3>
-              <GraphItem $percent={42} $color="#a9eb90" />
-            </li>
-            <li>
-              <h3>두려움</h3>
-              <GraphItem $percent={42} $color="#b69ff8" />
+              <h3>불안</h3>
+              <GraphItem $percent={data.emotions.anxiety} $color="#a9eb90" />
+              <Percent>{data.emotions.anxiety}%</Percent>
             </li>
             <li>
               <h3>기쁨</h3>
-              <GraphItem $percent={42} $color="#ffe156" />
+              <GraphItem $percent={data.emotions.happiness} $color="#ffe156" />
+              <Percent>{data.emotions.happiness}%</Percent>
             </li>
             <li>
               <h3>슬픔</h3>
-              <GraphItem $percent={42} $color="#bdd5fa" />
+              <GraphItem $percent={data.emotions.sadness} $color="#bdd5fa" />
+              <Percent>{data.emotions.sadness}%</Percent>
             </li>
             <li>
               <h3>중립</h3>
-              <GraphItem $percent={42} $color="#bdd5fa" />
+              <GraphItem $percent={data.emotions.neutrality} $color="#bdd5fa" />
+              <Percent>{data.emotions.neutrality}%</Percent>
             </li>
           </ul>
         </EmotionDistribution>
 
         <SentenceAnalysis>
           <WordAnalysisDashboard
-            totalSentences={totalSentences}
-            negativeSentences={negativeSentences}
-            positiveSentences={positiveSentences}
-            yesterdayNegativePercent={yesterdayNegativePercent}
-            negativeVariance={negativeVariance}
-            positiveVariance={positiveVariance}
+            totalSentences={data.totalSentenceCount}
+            negativePercent={data.negativeSentencePercent}
+            positivePercent={data.positiveSentencePercent}
           />
-
-          <p>
-            오늘은 날씨가 흐렸다. 그래서 그런지 나도 같이 우울해지는 느낌이었다.
-            비가 왔던가? 안나가봐서 모르겠다. 오늘은 악몽을 꾸었다. 졸업작품전에
-            아무 작품도 내지 못해 졸업을 못하는 꿈이었다. 요즘 졸업준비를 하면서
-            불안감이 점점 커져가는데, 아직 아무것도 진행된게 없어서 큰일이다.
-            악몽인거 깨닫고 일단 몸을 일으켜서 세수 하고 방을 정리하려 했지만,
-            갑자기 확 무기력해져서 그냥 누워버렸다. 그 상태로 몇 시간이고 숏츠
-            보면서 시간 보냈는데 어느새 자버린건지 눈떠보니 저녁이 됐다.
-            저녁에는 나름 다이어트 해보겠다고 직접 요리했는데 망했다. 설탕 대신
-            소금 넣은듯.. 아무튼 맛없었지만 재미는 있었다. 꾸역꾸역 먹고, 밤이
-            되어서야 컴퓨터 앞에 얹었는데 뭘 해야할지 너무 막막하고 집중도 잘
-            안돼서 일기부터 쓴다. 매번 후회하는 날이 반복되니, 어떻게 해야 할지
-            모르겠다. 암튼 오늘의 일기 끝.
-          </p>
+          <Wrapper>
+            {data.emotionSentences.map((item) => (
+              <span
+                style={{
+                  backgroundColor: getColors(item.emotionType),
+                }}
+                key={item.sentence}
+              >
+                {item.sentence}{" "}
+              </span>
+            ))}
+          </Wrapper>
         </SentenceAnalysis>
 
         <Graph>
@@ -178,7 +203,7 @@ export default function TodayReportPage() {
               <span>부정 문장</span>
             </div>
           </GraphHeader>
-          <Chart options={options} series={series} />
+          <Chart options={options} series={[pSeries, nSeries]} />
         </Graph>
 
         <div
@@ -280,6 +305,7 @@ const EmotionDistribution = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 90%;
     li {
       display: flex;
       h3 {
@@ -303,11 +329,13 @@ const EmotionDistribution = styled.div`
 `;
 
 const GraphItem = styled.div`
-  width: calc(${({ $percent }) => $percent}% - 15%);
+  width: calc(${({ $percent }) => $percent}%);
   background: ${({ $color }) => $color};
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 `;
+
+const Wrapper = styled.div``;
 
 const SentenceAnalysis = styled.div`
   padding: 20px 0;
@@ -315,7 +343,7 @@ const SentenceAnalysis = styled.div`
   border-bottom: 8px solid #e0e0e0;
   margin: 0 -15px;
 
-  p {
+  ${Wrapper} {
     background: #dcdcdc;
     margin: 0 20px;
     padding: 10px;
@@ -375,4 +403,15 @@ const StyledLinkButton = styled.div`
   padding: 15px 0;
   border-radius: 8px;
   margin-top: 20px;
+`;
+
+const Percent = styled.div`
+  //styleName: body/Sm;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  margin-left: 10px;
 `;

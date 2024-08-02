@@ -103,7 +103,7 @@ const DateCtrl = styled.div`
   display: flex;
   gap: 10px;
   color: #404040;
-
+  align-items: center;
   font-family: Pretendard;
   font-size: 18px;
   font-style: normal;
