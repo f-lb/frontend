@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import LogoImg from "../assets/logoImg.png";
 import { postLogin } from "../api/auth";
 import { useEffect, useState } from "react";
 
@@ -34,7 +35,9 @@ export default function Signin() {
 
   return (
     <Container>
-      <div></div>
+      <Logo>
+        <img src={LogoImg} alt="logo" />
+      </Logo>
       <form onSubmit={handleSubmit}>
         <Input
           style={{ marginBottom: "20px" }}
@@ -75,6 +78,13 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const Logo = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+`;
+
 const Input = styled.input`
   width: 100%;
   border: none;
@@ -85,20 +95,17 @@ const Input = styled.input`
     outline: none;
   }
   &::placeholder {
-    //styleName: subtitle/Md;
     font-family: Pretendard;
     font-size: 16px;
     font-weight: 400;
     line-height: 20.8px;
     letter-spacing: -0.02em;
     text-align: left;
-
     color: #e0e0e0;
   }
 `;
 
 const Footer = styled.div`
-  //styleName: caption/Md;
   font-family: Pretendard;
   font-size: 12px;
   font-weight: 400;
