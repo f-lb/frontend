@@ -22,9 +22,40 @@ export default function RecordPage() {
     setSelectedMonth(+e.target.value[0]);
   };
 
+  const decideAdd = (selectedMonth, selectedDay) => {
+    if (
+      selectedMonth === 1 ||
+      selectedMonth === 3 ||
+      selectedMonth === 5 ||
+      selectedMonth === 7 ||
+      selectedMonth === 8 ||
+      selectedMonth === 10 ||
+      selectedMonth === 12
+    ) {
+      if (selectedDay === 31) return 0;
+      return 1;
+    } else if (
+      selectedMonth === 4 ||
+      selectedMonth === 6 ||
+      selectedMonth === 9 ||
+      selectedMonth === 11
+    ) {
+      if (selectedDay === 30) return 0;
+      return 1;
+    } else {
+      if (selectedDay === 29) return 0;
+      return 1;
+    }
+  };
+
   const handleSubmitDiary = async () => {
     console.log(`2024-${selectedMonth}-${selectedDay}`);
-    const date = new window.Date(`2024-${selectedMonth}-${selectedDay + 1}`);
+    const date = new window.Date(
+      `2024-${selectedMonth}-${
+        selectedDay + decideAdd(selectedMonth, selectedDay)
+      }`
+    );
+
     const formattedDate = date.toISOString().split(".")[0];
     console.log("formattedDate:", formattedDate);
     setLoading(true);
