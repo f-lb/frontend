@@ -12,16 +12,13 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formState.email === "" || formState.password === "") return;
-
     try {
       const response = await postLogin({
         email: formState.email,
         password: formState.password,
       });
-
       console.log(response.headers.authorization);
       localStorage.setItem("accessToken", response.headers.authorization);
-
       navigate("/");
     } catch (error) {
       setErrorMessage("존재하지 않는 아이디 혹은 비밀번호입니다.");
