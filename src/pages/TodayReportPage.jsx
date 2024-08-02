@@ -6,6 +6,7 @@ import Chart from "react-apexcharts";
 import CommingSoon from "../assets/comming-soon.jpeg";
 import { Link } from "react-router-dom";
 
+
 const series = [
   {
     data: [30, 40, 45, 50, 49, 60, 70, 91],
