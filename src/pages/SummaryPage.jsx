@@ -11,10 +11,10 @@ const SummaryPage = ({ mode = "free" }) => {
   console.log("SummaryPage diaryId:", diaryId); // diaryId를 로그로 출력해 확인
 
   useEffect(() => {
-    (async () => {
-      const { data } = await getReports({ diaryId });
-      console.log(data);
-    })();
+    // (async () => {
+    //   const { data } = await getReports({ diaryId });
+    //   console.log(data);
+    // })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
