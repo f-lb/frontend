@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { getDiariesByMonth } from "../api/diaries";
 import { getColors } from "../utils/emotionColors";
+import { Link } from "react-router-dom";
 
 const Dayarr = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -92,7 +93,9 @@ export default function WeeklyModeCalendarPage() {
                     오늘의 빈칸을 채워볼까요?
                   </h2>
                   <LinkToPostContainer>
-                    <LinkToPost>일기 작성하고 분석받기 {">"}</LinkToPost>
+                    <LinkToPost to="record">
+                      일기 작성하고 분석받기 {">"}
+                    </LinkToPost>
                   </LinkToPostContainer>
                 </DiaryWrapper>
               </Diary>
@@ -224,7 +227,7 @@ const Emotions = styled.div`
   gap: 3px;
 `;
 
-const LinkToPost = styled.div`
+const LinkToPost = styled(Link)`
   text-decoration: underline;
   //styleName: caption/graySm;
   font-family: Pretendard;
