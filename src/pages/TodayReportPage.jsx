@@ -82,23 +82,23 @@ export default function TodayReportPage() {
   console.log("data:", data.monthlyEmotionResponse);
 
   useEffect(() => {
+    const mData = data.monthlyEmotionResponse.sort((a, b) =>
+      dayjs(a.createdDate).diff(b.createdDate)
+    );
+
     setOptions({
       ...options,
       xaxis: {
-        categories: data.monthlyEmotionResponse.map((data) => data.createdDate),
+        categories: mData.map((data) => data.createdDate),
       },
     });
 
     setPSeries({
-      data: data.monthlyEmotionResponse.map(
-        (data) => data.positiveEmotionPercent
-      ),
+      data: mData.map((data) => data.positiveEmotionPercent),
       name: "긍정",
     });
     setNSeries({
-      data: data.monthlyEmotionResponse.map(
-        (data) => data.negativeEmotionPercent
-      ),
+      data: mData.map((data) => data.negativeEmotionPercent),
       name: "부정",
     });
   }, []);
