@@ -1,7 +1,12 @@
 import axios from "axios";
 
+const host =
+  window.location.hostname === "localhost"
+    ? "http://http://43.201.49.70:8080/api"
+    : "api";
+
 const axiosInstance = axios.create({
-  baseURL: "http://43.201.49.70:8080/api",
+  baseURL: host,
 });
 
 axiosInstance.interceptors.request.use((config) => {
