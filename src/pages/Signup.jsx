@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import BackIcon from "../assets/back.svg";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { postSignup } from "../api/auth";
 
 export default function Signup() {
@@ -16,6 +16,8 @@ export default function Signup() {
     password: "",
     passwordCheck: "",
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,10 +42,17 @@ export default function Signup() {
 
     try {
       await postSignup({ name, email, password });
+      navigate("/signup-success");
     } catch (error) {
       alert("이미 가입된 회원입니다.");
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <Container>

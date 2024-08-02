@@ -4,18 +4,25 @@ import CalendarSIcon01 from "../assets/calendar_s01.svg";
 import CalendarSIcon02 from "../assets/calendar_s02.svg";
 import Filled_CalendarSIcon01 from "../assets/calendar_s01_filled.svg";
 import Filled_CalendarSIcon02 from "../assets/calendar_s02_filled.svg";
-import { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { selectedMonthState } from "../recoil/atom";
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState("monthlyMode");
   const [selectedMonth, setSelectedMonth] = useRecoilState(selectedMonthState);
+  const navigate = useNavigate();
 
   const handleMonthChange = (e) => {
     setSelectedMonth(+e.target.value);
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <Container>

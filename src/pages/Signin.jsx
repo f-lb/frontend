@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { postLogin } from "../api/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Signin() {
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -19,13 +19,19 @@ export default function Signin() {
         password: formState.password,
       });
 
-      console.log(response.headers["Authorization"]);
+      console.log(response.headers.authorization);
 
       // navigate("/");
     } catch (error) {
       setErrorMessage("존재하지 않는 아이디 혹은 비밀번호입니다.");
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <Container>
