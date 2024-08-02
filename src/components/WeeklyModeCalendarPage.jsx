@@ -17,6 +17,7 @@ export default function WeeklyModeCalendarPage() {
   useEffect(() => {
     if (selectedMonth !== dayjs().month() + 1) return;
     scroll.current.scrollTop = (dayjs().date() - 1) * 100;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

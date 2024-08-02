@@ -4,9 +4,8 @@ import { AnalyzePage, CalendarPage, ProfilePage, RecordPage } from "./pages";
 import { BnbLayout, RootLayout } from "./layouts";
 import MontlyModeCalendarPage from "./components/MontlyModeCalendarPage";
 import WeeklyModeCalendarPage from "./components/WeeklyModeCalendarPage";
-import LoadingPage from "./pages/LoadingPage";
 import SummaryPage from "./pages/SummaryPage"; // SummaryPage 가져오기
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import SignupSuccess from "./pages/SignupSuccess";

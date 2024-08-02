@@ -168,17 +168,6 @@ const PositiveValue = styled.div`
   line-height: normal;
 `;
 
-const StyledSpan = styled.span`
-  color: var(--fear-500, #b69ff8);
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 120%; /* 19.2px */
-  letter-spacing: -0.32px;
-  margin-left: 4px;
-`;
-
 const SubText = styled.div`
   color: #8a8a8a;
   font-family: Pretendard;
