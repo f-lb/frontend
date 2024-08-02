@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { ReactComponent as BackIcon } from "../assets/back.svg";
 import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
+import { getReports } from "../api/reports";
 
 const SummaryPage = ({ mode = "free" }) => {
   const { diaryId } = useParams();
   console.log("SummaryPage diaryId:", diaryId); // diaryId를 로그로 출력해 확인
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await getReports({ diaryId });
+      console.log(data);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!diaryId) {
     return <div>Error: diaryId is required</div>;
@@ -25,7 +34,7 @@ const SummaryPage = ({ mode = "free" }) => {
         {mode === "free" ? <FreeMode diaryId={diaryId} /> : <TemplateMode />}
       </Content>
       <ButtonWrapper>
-        <Button>마음 리포트 보러가기</Button>
+        <Button to="/today-report">마음 리포트 보러가기</Button>
       </ButtonWrapper>
     </Container>
   );

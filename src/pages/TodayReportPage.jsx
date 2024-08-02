@@ -71,8 +71,6 @@ export default function TodayReportPage() {
   const [pSeries, setPSeries] = useState({});
   const [nSeries, setNSeries] = useState({});
 
-  console.log("data:", data.monthlyEmotionResponse);
-
   useEffect(() => {
     const mData = data.monthlyEmotionResponse.sort((a, b) =>
       dayjs(a.createdDate).diff(b.createdDate)
