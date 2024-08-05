@@ -121,7 +121,7 @@ export default function TodayReportPage() {
       </Header>
       <Main>
         <h2 style={{ margin: "15px 0" }}>
-          민성님은 오늘
+          {localStorage.getItem("name")}님은 오늘
           <br />
           <span style={{ color: getColors(data.totalEmotionType) }}>
             {getEmotion(data.totalEmotionType)}
@@ -160,7 +160,7 @@ export default function TodayReportPage() {
             </li>
             <li>
               <h3>중립</h3>
-              <GraphItem $percent={data.emotions.neutrality} $color="#bdd5fa" />
+              <GraphItem $percent={data.emotions.neutrality} $color="#C5C5C5" />
               <Percent>{data.emotions.neutrality}%</Percent>
             </li>
           </ul>

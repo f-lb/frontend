@@ -48,7 +48,8 @@ export default function RecordPage() {
     }
   };
 
-  const handleSubmitDiary = async () => {
+  const handleSubmitDiary = async (e) => {
+    e.preventDefault();
     console.log(`2024-${selectedMonth}-${selectedDay}`);
     const date = new window.Date(`2024-${selectedMonth}-${selectedDay}`);
     console.log("date:", date);
@@ -63,7 +64,12 @@ export default function RecordPage() {
       });
       setLoading(false);
       console.log(data);
-      // window.localStorage.setItem(`${new D}-${}`)
+      window.localStorage.setItem(
+        `${dayjs(data.createdDate).month() + 1}-${dayjs(
+          data.createdDate
+        ).date()}`,
+        JSON.stringify(data)
+      );
       navigate(`/today-report?data=${JSON.stringify(data)}`);
     } catch (error) {
       alert("일기작성에 실패하였습니다.");
@@ -121,7 +127,7 @@ export default function RecordPage() {
           </DateList>
         </Datepick>
 
-        <RecordField>
+        <RecordField onSubmit={handleSubmitDiary}>
           <input
             placeholder="제목을 입력해주세요"
             onChange={(e) => setTitle(e.target.value)}
@@ -131,7 +137,7 @@ export default function RecordPage() {
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
 
-          <Btn onClick={handleSubmitDiary}>일기 작성하기</Btn>
+          <Btn type="submit">일기 작성하기</Btn>
         </RecordField>
       </div>
     </Container>
@@ -221,7 +227,7 @@ const Date = styled.li`
   }
 `;
 
-const RecordField = styled.div`
+const RecordField = styled.form`
   background: #fff;
   padding: 50px 20px 100px;
   margin-top: -50px;

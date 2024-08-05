@@ -1,36 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { ReactComponent as TodayIcon } from "../assets/today.svg";
-import { getDiaryById } from "../api/summary";
 
-const FreeMode = ({ diaryId }) => {
+const FreeMode = ({ diaryId, loading, error, diary }) => {
   console.log(diaryId);
-  const [diary, setDiary] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (!diaryId) {
-      console.error("diaryId is undefined");
-      setError(new Error("diaryId is required"));
-      setLoading(false);
-      return;
-    }
+  // useEffect(() => {
+  //   if (!diaryId) {
+  //     console.error("diaryId is undefined");
+  //     setError(new Error("diaryId is required"));
+  //     setLoading(false);
+  //     return;
+  //   }
 
-    console.log(`Fetching diary with ID: ${diaryId}`);
+  //   console.log(`Fetching diary with ID: ${diaryId}`);
 
-    (async () => {
-      try {
-        const result = await getDiaryById(diaryId);
-        setDiary(result);
-      } catch (error) {
-        console.error("Error fetching diary:", error);
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [diaryId]);
+  //   (async () => {
+  //     try {
+  //       const result = await getDiaryById(diaryId);
+  //       setDiary(result);
+  //     } catch (error) {
+  //       console.error("Error fetching diary:", error);
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   })();
+  // }, [diaryId]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

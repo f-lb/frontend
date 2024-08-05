@@ -1,25 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { ReactComponent as BackIcon } from "../assets/back.svg";
 import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
+import { getDiaryById } from "../api/summary";
+import dayjs from "dayjs";
 
 const SummaryPage = ({ mode = "free" }) => {
   const { diaryId } = useParams();
-  console.log("SummaryPage diaryId:", diaryId); // diaryId를 로그로 출력해 확인
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const { data } = await getReports({ diaryId: 9901234 });
-  //     console.log(data);
-  //   })();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [diaryId]);
+  const [diary, setDiary] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [report, setReport] = useState(null);
+
+  useEffect(() => {
+    if (!diaryId) {
+      console.error("diaryId is undefined");
+      setError(new Error("diaryId is required"));
+      setLoading(false);
+      return;
+    }
+
+    console.log(`Fetching diary with ID: ${diaryId}`);
+
+    (async () => {
+      try {
+        const result = await getDiaryById(diaryId);
+        setDiary(result);
+      } catch (error) {
+        console.error("Error fetching diary:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [diaryId]);
+
+  useEffect(() => {
+    if (!diary) return;
+    setReport(
+      localStorage.getItem(
+        `${dayjs(diary.createdDate).month() + 1}-${dayjs(
+          diary.createdDate
+        ).date()}`
+      )
+    );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [diary]);
 
   if (!diaryId) {
     return <div>Error: diaryId is required</div>;
   }
+
+  console.log("report:", report);
 
   return (
     <Container>
@@ -30,10 +67,21 @@ const SummaryPage = ({ mode = "free" }) => {
         <NavTitle>일기</NavTitle>
       </NavBar>
       <Content>
-        {mode === "free" ? <FreeMode diaryId={diaryId} /> : <TemplateMode />}
+        {mode === "free" ? (
+          <FreeMode
+            diaryId={diaryId}
+            loading={loading}
+            diary={diary}
+            error={error}
+          />
+        ) : (
+          <TemplateMode />
+        )}
       </Content>
       <ButtonWrapper>
-        <Button to="/today-report">마음 리포트 보러가기</Button>
+        <Button to={`/today-report?data=${report}`}>
+          마음 리포트 보러가기
+        </Button>
       </ButtonWrapper>
     </Container>
   );

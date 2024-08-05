@@ -42,6 +42,8 @@ export default function Signup() {
 
     try {
       await postSignup({ name, email, password });
+      localStorage.setItem("name", name);
+
       navigate("/signup-success");
     } catch (error) {
       alert("이미 가입된 회원입니다.");
