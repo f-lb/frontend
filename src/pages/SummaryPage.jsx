@@ -24,7 +24,7 @@ const SummaryPage = ({ mode = "free" }) => {
   return (
     <Container>
       <NavBar>
-        <Arrow>
+        <Arrow to="/">
           <BackIcon />
         </Arrow>
         <NavTitle>일기</NavTitle>
@@ -64,7 +64,7 @@ const NavBar = styled.header`
   background: #fff;
 `;
 
-const Arrow = styled.div`
+const Arrow = styled(Link)`
   width: 40px;
   height: 40px;
   position: absolute;
