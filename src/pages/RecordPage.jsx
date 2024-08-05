@@ -50,8 +50,8 @@ export default function RecordPage() {
 
   const handleSubmitDiary = async (e) => {
     e.preventDefault();
-    const date = new window.Date(`2024-${selectedMonth}-${selectedDay}`);
-    console.log("**date:", date.getMonth() + 1, date.getDate(), date);
+    const date = dayjs(`2024-${selectedMonth}-${selectedDay}`);
+    console.log("**date:", date.month() + 1, date.date(), date);
     // const formattedDate = date.toISOString().split(".")[0];
     // console.log("formattedDate:", formattedDate, "date:", date, selectedDay);
     setLoading(true);
