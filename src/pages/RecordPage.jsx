@@ -57,7 +57,6 @@ export default function RecordPage() {
     // console.log("formattedDate:", formattedDate, "date:", date, selectedDay);
     setLoading(true);
     try {
-      alert("date:", date);
       const { data } = await postDiary({
         date: date,
         title,
@@ -74,6 +73,8 @@ export default function RecordPage() {
       navigate(`/today-report?data=${JSON.stringify(data)}`);
     } catch (error) {
       alert("일기작성에 실패하였습니다. 에러:", error.message);
+      console.log(error);
+      console.log(error.message);
     }
   };
 

@@ -7,8 +7,7 @@ const DairySummary = ({ title, createdDate, color }) => {
       <Wrapper2>
         <DateContainer>
           <Day>
-            2024-{dayjs(createdDate).month() + 1}-
-            {dayjs(createdDate).date() + 1}
+            2024-{dayjs(createdDate).month() + 1}-{dayjs(createdDate).date()}
           </Day>
         </DateContainer>
       </Wrapper2>
