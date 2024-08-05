@@ -7,6 +7,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import dayjs from "dayjs";
 import CalendarIcon from "../assets/report-calendar-icon.svg";
 import { getColors, getCover, getEmotion } from "../utils/emotionColors";
+import { getDateFn } from "../utils/date";
 
 const OPTIONS = {
   chart: {
@@ -113,8 +114,7 @@ export default function TodayReportPage() {
             <img src={CalendarIcon} alt="calendar icon" />
             <p style={{ marginBottom: "-4px" }}>
               2024-{dayjs(data.createdDate).month() + 1}-
-              {dayjs(data.createdDate).date()}-
-              {Day[dayjs(data.createdDate).day()]}
+              {getDateFn(data.createdDate)}-{Day[dayjs(data.createdDate).day()]}
             </p>
           </div>
         </Headings>

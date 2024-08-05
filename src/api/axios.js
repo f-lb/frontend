@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://main--radiant-brigadeiros-f8e731.netlify.app/api",
+  baseURL: "https://main--radiant-brigadeiros-f8e731.netlify.app/api/",
 });
 
 axiosInstance.interceptors.request.use((config) => {

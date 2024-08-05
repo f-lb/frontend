@@ -50,23 +50,20 @@ export default function RecordPage() {
 
   const handleSubmitDiary = async () => {
     console.log(`2024-${selectedMonth}-${selectedDay}`);
-    const date = new window.Date(
-      `2024-${selectedMonth}-${
-        selectedDay + decideAdd(selectedMonth, selectedDay)
-      }`
-    );
-
-    const formattedDate = date.toISOString().split(".")[0];
-    console.log("formattedDate:", formattedDate);
+    const date = new window.Date(`2024-${selectedMonth}-${selectedDay}`);
+    console.log("date:", date);
+    // const formattedDate = date.toISOString().split(".")[0];
+    // console.log("formattedDate:", formattedDate, "date:", date, selectedDay);
     setLoading(true);
     try {
       const { data } = await postDiary({
-        date: formattedDate,
+        date: date,
         title,
         content,
       });
       setLoading(false);
       console.log(data);
+      // window.localStorage.setItem(`${new D}-${}`)
       navigate(`/today-report?data=${JSON.stringify(data)}`);
     } catch (error) {
       alert("일기작성에 실패하였습니다.");
