@@ -52,7 +52,7 @@ export default function RecordPage() {
     e.preventDefault();
     console.log(`2024-${selectedMonth}-${selectedDay}`);
     const date = new window.Date(`2024-${selectedMonth}-${selectedDay}`);
-    console.log("date:", date);
+    console.log("date:", date.getMonth() + 1, date.getDate());
     // const formattedDate = date.toISOString().split(".")[0];
     // console.log("formattedDate:", formattedDate, "date:", date, selectedDay);
     setLoading(true);
