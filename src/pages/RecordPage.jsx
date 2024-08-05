@@ -52,8 +52,6 @@ export default function RecordPage() {
     e.preventDefault();
     const date = dayjs(`2024-${selectedMonth}-${selectedDay}`);
     console.log("**date:", date.month() + 1, date.date(), date);
-    // const formattedDate = date.toISOString().split(".")[0];
-    // console.log("formattedDate:", formattedDate, "date:", date, selectedDay);
     setLoading(true);
     try {
       const { data } = await postDiary({

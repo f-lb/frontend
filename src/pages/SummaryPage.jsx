@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as BackIcon } from "../assets/back.svg";
 import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
@@ -15,6 +15,7 @@ const SummaryPage = ({ mode = "free" }) => {
   const [error, setError] = useState(null);
 
   const [report, setReport] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!diaryId) {
@@ -41,16 +42,22 @@ const SummaryPage = ({ mode = "free" }) => {
 
   useEffect(() => {
     if (!diary) return;
-    setReport(
-      localStorage.getItem(
-        `${dayjs(diary.createdDate).month() + 1}-${dayjs(
-          diary.createdDate
-        ).date()}`
-      )
+
+    const data = localStorage.getItem(
+      `${dayjs(diary.createdDate).month() + 1}-${dayjs(
+        diary.createdDate
+      ).date()}`
     );
+    console.log("data, data:", data);
+    setReport(data);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [diary]);
+
+  const handleNavigateClick = () => {
+    console.log("asdf");
+    navigate(`/today-report?data=${report}`);
+  };
 
   if (!diaryId) {
     return <div>Error: diaryId is required</div>;
@@ -79,9 +86,9 @@ const SummaryPage = ({ mode = "free" }) => {
         )}
       </Content>
       <ButtonWrapper>
-        <Button to={`/today-report?data=${report}`}>
-          마음 리포트 보러가기
-        </Button>
+        {report !== null && (
+          <Button onClick={handleNavigateClick}>마음 리포트 보러가기</Button>
+        )}
       </ButtonWrapper>
     </Container>
   );
@@ -155,7 +162,7 @@ const ButtonWrapper = styled.div`
   margin-top: auto;
 `;
 
-const Button = styled(Link)`
+const Button = styled.button`
   margin-top: 10px;
   display: flex;
   justify-content: center;

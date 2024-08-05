@@ -9,13 +9,7 @@ import { lazy } from "react";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import SignupSuccess from "./pages/SignupSuccess";
-
-const delay = new Promise((resolve) => setTimeout(resolve, 2000));
-
-const TodayReportPageLazyed = lazy(async () => {
-  await delay;
-  return import("./pages/TodayReportPage");
-});
+import TodayReportPage from "./pages/TodayReportPage";
 
 function App() {
   return (
@@ -39,7 +33,7 @@ function App() {
         </Routes>
         {/* <Suspense fallback={<LoadingPage />}> */}
         <Routes>
-          <Route path="/today-report" element={<TodayReportPageLazyed />} />
+          <Route path="/today-report" element={<TodayReportPage />} />
         </Routes>
         {/* </Suspense> */}
       </BrowserRouter>
