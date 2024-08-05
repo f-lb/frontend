@@ -57,6 +57,7 @@ export default function RecordPage() {
     // console.log("formattedDate:", formattedDate, "date:", date, selectedDay);
     setLoading(true);
     try {
+      alert("date:", date);
       const { data } = await postDiary({
         date: date,
         title,
