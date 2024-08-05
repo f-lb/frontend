@@ -4,9 +4,26 @@ import TodayCard from "../assets/todayCard.svg";
 import WeeklyCard from "../assets/weeklyCard.svg";
 import MonthlyCard from "../assets/monthlyCard.svg";
 import QuarterlyCard from "../assets/quarterlyCard.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 export default function AnalyzePage() {
+  const navigate = useNavigate();
+
+  const handleNavigateClick = (e) => {
+    e.preventDefault();
+    const data = localStorage.getItem(
+      `${dayjs().month() + 1}-${dayjs().date()}`
+    );
+
+    if (!data) {
+      alert("아직 오늘의 일기를 작성하지 않으셨습니다.");
+      return;
+    }
+
+    navigate(`/today-report?data=${data}`);
+  };
+
   return (
     <Wrapper>
       <Nav>리포트</Nav>
@@ -14,7 +31,7 @@ export default function AnalyzePage() {
         <img src={Frame} alt="Frame" />
       </FrameWrapper>
       <ReportWrapper>
-        <ReportLink to="/today-report">
+        <ReportLink onClick={handleNavigateClick}>
           <ReportButton background={TodayCard}>
             <ReportTitle>하루 리포트</ReportTitle>
             <ReportDesc>나의 하루는 어떤 감정으로 채워졌을까?</ReportDesc>
@@ -100,7 +117,8 @@ const ReportButton = styled.button`
   align-items: flex-start;
   gap: 8px;
   border-radius: 12px;
-  background: ${({ background }) => `url(${background}) lightgray 50% / cover no-repeat`};
+  background: ${({ background }) =>
+    `url(${background}) lightgray 50% / cover no-repeat`};
   background-blend-mode: plus-lighter, normal;
   border: none;
   cursor: pointer;

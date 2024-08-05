@@ -16,7 +16,7 @@ export default function MontlyModeCalendarPage() {
   const [isClicked, setIsClicked] = useState(null);
 
   const navigate = useNavigate();
-  console.log("diaries:", diaries);
+
   useEffect(() => {
     setDiaries({});
     if (!localStorage.getItem("accessToken")) {

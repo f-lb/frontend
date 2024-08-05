@@ -1,36 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { ReactComponent as TodayIcon } from "../assets/today.svg";
-import { getDiaryById } from '../api/summary';
 
-const FreeMode = ({ diaryId }) => {
+const FreeMode = ({ diaryId, loading, error, diary }) => {
   console.log(diaryId);
-  const [diary, setDiary] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (!diaryId) {
-      console.error('diaryId is undefined');
-      setError(new Error('diaryId is required'));
-      setLoading(false);
-      return;
-    }
+  // useEffect(() => {
+  //   if (!diaryId) {
+  //     console.error("diaryId is undefined");
+  //     setError(new Error("diaryId is required"));
+  //     setLoading(false);
+  //     return;
+  //   }
 
-    console.log(`Fetching diary with ID: ${diaryId}`);
+  //   console.log(`Fetching diary with ID: ${diaryId}`);
 
-    (async () => {
-      try {
-        const result = await getDiaryById(diaryId);
-        setDiary(result);
-      } catch (error) {
-        console.error('Error fetching diary:', error);
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [diaryId]);
+  //   (async () => {
+  //     try {
+  //       const result = await getDiaryById(diaryId);
+  //       setDiary(result);
+  //     } catch (error) {
+  //       console.error("Error fetching diary:", error);
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   })();
+  // }, [diaryId]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -41,7 +37,7 @@ const FreeMode = ({ diaryId }) => {
   const date = new Date(diary.createdDate);
   const title = diary.title;
   const emotionKey = diary.emotionType;
-  const dayofweek = date.toLocaleString('ko-KR', { weekday: 'long' });
+  const dayofweek = date.toLocaleString("ko-KR", { weekday: "long" });
   const content = diary.content;
   const emotions = [emotionKey];
 
@@ -51,7 +47,7 @@ const FreeMode = ({ diaryId }) => {
     2: { label: "분노", description: "화가났던" },
     3: { label: "불안", description: "오싹했던" },
     4: { label: "슬픔", description: "울적했던" },
-    5: { label: "중립", description: "평화로웠던" }
+    5: { label: "중립", description: "평화로웠던" },
   };
 
   const formatDate = (date) => {
@@ -71,7 +67,9 @@ const FreeMode = ({ diaryId }) => {
       <Day>
         <DateText>
           {formatDate(date)}
-          <SubTitle>{emotionDescriptions[emotionKey].description} {dayofweek}</SubTitle>
+          <SubTitle>
+            {emotionDescriptions[emotionKey].description} {dayofweek}
+          </SubTitle>
         </DateText>
         {isToday(date) && (
           <TodayIconWrapper>
@@ -87,7 +85,9 @@ const FreeMode = ({ diaryId }) => {
         <DairyFooter>
           <Emotions>
             {emotions.map((emotion, index) => (
-              <Emotion key={index}>#{emotionDescriptions[emotion].label}</Emotion>
+              <Emotion key={index}>
+                #{emotionDescriptions[emotion].label}
+              </Emotion>
             ))}
           </Emotions>
         </DairyFooter>
@@ -147,8 +147,8 @@ const Dairy = styled.div`
 `;
 
 const DairyTitle = styled.div`
-  margin-bottom:10px;
-  margin-top:16px;
+  margin-bottom: 10px;
+  margin-top: 16px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -180,9 +180,9 @@ const DairyContent = styled.div`
 `;
 
 const DairyFooter = styled.div`
- margin-top: 18px;  
- display: flex;
- flex-direction: row;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
   width: 100%;
 `;

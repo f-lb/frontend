@@ -1,40 +1,87 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { ReactComponent as BackIcon } from "../assets/back.svg";
 import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
-// import { getReports } from "../api/reports";
+import { getDiaryById } from "../api/summary";
+import dayjs from "dayjs";
 
 const SummaryPage = ({ mode = "free" }) => {
   const { diaryId } = useParams();
-  console.log("SummaryPage diaryId:", diaryId); // diaryId를 로그로 출력해 확인
+
+  const [diary, setDiary] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [report, setReport] = useState(null);
 
   useEffect(() => {
-    // (async () => {
-    //   const { data } = await getReports({ diaryId });
-    //   console.log(data);
-    // })();
+    if (!diaryId) {
+      console.error("diaryId is undefined");
+      setError(new Error("diaryId is required"));
+      setLoading(false);
+      return;
+    }
+
+    console.log(`Fetching diary with ID: ${diaryId}`);
+
+    (async () => {
+      try {
+        const result = await getDiaryById(diaryId);
+        setDiary(result);
+      } catch (error) {
+        console.error("Error fetching diary:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [diaryId]);
+
+  useEffect(() => {
+    if (!diary) return;
+    setReport(
+      localStorage.getItem(
+        `${dayjs(diary.createdDate).month() + 1}-${dayjs(
+          diary.createdDate
+        ).date()}`
+      )
+    );
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [diary]);
 
   if (!diaryId) {
     return <div>Error: diaryId is required</div>;
   }
 
+  console.log("report:", report);
+
   return (
     <Container>
       <NavBar>
-        <Arrow>
+        <Arrow to="/">
           <BackIcon />
         </Arrow>
         <NavTitle>일기</NavTitle>
       </NavBar>
       <Content>
-        {mode === "free" ? <FreeMode diaryId={diaryId} /> : <TemplateMode />}
+        {mode === "free" ? (
+          <FreeMode
+            diaryId={diaryId}
+            loading={loading}
+            diary={diary}
+            error={error}
+          />
+        ) : (
+          <TemplateMode />
+        )}
       </Content>
       <ButtonWrapper>
-        <Button to="/today-report">마음 리포트 보러가기</Button>
+        <Button to={`/today-report?data=${report}`}>
+          마음 리포트 보러가기
+        </Button>
       </ButtonWrapper>
     </Container>
   );
@@ -65,7 +112,7 @@ const NavBar = styled.header`
   background: #fff;
 `;
 
-const Arrow = styled.div`
+const Arrow = styled(Link)`
   width: 40px;
   height: 40px;
   position: absolute;

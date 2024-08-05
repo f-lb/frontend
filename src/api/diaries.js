@@ -1,8 +1,10 @@
+import dayjs from "dayjs";
 import axiosInstance from "./axios";
 
 const postDiary = async ({ date, title, content }) => {
+  console.log("date in axios:", date);
   const data = await axiosInstance.post("/diaries/save", {
-    date,
+    date: dayjs(date).add(9, "hour"),
     title,
     content,
   });

@@ -13,7 +13,7 @@ export default function ProfilePage() {
           <ProfileImage src={ProfileImg} alt="Profile" />
           <Badge src={BasicImg} alt="Basic Badge" />
         </ProfileImageWrapper>
-        <ProfileName>티라미수1</ProfileName>
+        <ProfileName>{localStorage.getItem("name")}</ProfileName>
         <ProfileEmail>fill_intheblank@filb.com</ProfileEmail>
       </ProfileSection>
       <Menu>
@@ -59,7 +59,7 @@ const Wrapper = styled.div`
   height: 100vh; /* 화면 높이에 맞춤 */
   margin: 0 auto;
   font-family: Pretendard, sans-serif;
-  background: #FFF;
+  background: #fff;
   display: flex;
   flex-direction: column;
   position: relative; /* 상대 위치 지정 */
@@ -76,14 +76,14 @@ const Nav = styled.div`
 `;
 
 const ProfileSection = styled.div`
-  height: 171px; 
+  height: 171px;
   display: flex;
   padding: 24px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   align-self: stretch;
-  background: var(--750, #1F1F1F);
+  background: var(--750, #1f1f1f);
 `;
 
 const ProfileImageWrapper = styled.div`
@@ -99,15 +99,15 @@ const ProfileImage = styled.img`
 
 const Badge = styled.img`
   position: absolute;
-  bottom: -17px; 
+  bottom: -17px;
   left: 50%;
   transform: translateX(-50%);
-  width: 68px;  
-  height: 26px; 
+  width: 68px;
+  height: 26px;
 `;
 
 const ProfileName = styled.div`
-  color: var(--gray-50, #FAFAFA);
+  color: var(--gray-50, #fafafa);
   text-align: center;
   font-family: Pretendard;
   font-size: 20px;
@@ -153,7 +153,7 @@ const MenuItemContent = styled.div`
   align-items: center;
   width: 344px;
   height: 26px;
-  border-bottom: 1px solid var(--gray-300, #E0E0E0);
+  border-bottom: 1px solid var(--gray-300, #e0e0e0);
 `;
 
 const MenuItemText = styled.span`
@@ -173,7 +173,7 @@ const Arrow = styled.img`
 `;
 
 const Footer = styled.div`
-  color: var(--gray-400Neutral, #C5C5C5);
+  color: var(--gray-400Neutral, #c5c5c5);
   margin-top: 230px;
   display: flex;
   justify-content: center;
@@ -182,7 +182,7 @@ const Footer = styled.div`
 `;
 
 const FooterButton = styled.button`
-  color: var(--gray-400Neutral, #C5C5C5);
+  color: var(--gray-400Neutral, #c5c5c5);
   font-family: Pretendard;
   font-size: 12px;
   font-style: normal;
