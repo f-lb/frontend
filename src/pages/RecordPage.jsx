@@ -52,7 +52,7 @@ export default function RecordPage() {
     e.preventDefault();
     console.log(`2024-${selectedMonth}-${selectedDay}`);
     const date = new window.Date(`2024-${selectedMonth}-${selectedDay}`);
-    console.log("date:", date);
+    console.log("date:", date.getMonth() + 1, date.getDate());
     // const formattedDate = date.toISOString().split(".")[0];
     // console.log("formattedDate:", formattedDate, "date:", date, selectedDay);
     setLoading(true);
@@ -73,7 +73,7 @@ export default function RecordPage() {
       );
       navigate(`/today-report?data=${JSON.stringify(data)}`);
     } catch (error) {
-      alert("일기작성에 실패하였습니다.");
+      alert("일기작성에 실패하였습니다. 에러:", error);
     }
   };
 
