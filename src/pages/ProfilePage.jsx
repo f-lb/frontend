@@ -10,7 +10,6 @@ export default function ProfilePage() {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("name");
 
     navigate("/");
   };
@@ -184,7 +183,7 @@ const Arrow = styled.img`
 
 const Footer = styled.div`
   color: var(--gray-400Neutral, #c5c5c5);
-  margin-top: 160px;
+  margin-top: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
