@@ -18,7 +18,6 @@ export default function Signin() {
         email: formState.email,
         password: formState.password,
       });
-      console.log(response.headers.authorization);
       localStorage.setItem("accessToken", response.headers.authorization);
       navigate("/");
     } catch (error) {

@@ -26,8 +26,6 @@ const SummaryPage = ({ mode = "free" }) => {
       return;
     }
 
-    console.log(`Fetching diary with ID: ${diaryId}`);
-
     (async () => {
       try {
         const result = await getDiaryById(diaryId);
@@ -66,15 +64,12 @@ const SummaryPage = ({ mode = "free" }) => {
   }, [diary]);
 
   const handleNavigateClick = () => {
-    console.log("asdf");
     navigate(`/today-report?data=${JSON.stringify(report)}`);
   };
 
   if (!diaryId) {
     return <div>Error: diaryId is required</div>;
   }
-
-  console.log("report:", report);
 
   return (
     <Container>

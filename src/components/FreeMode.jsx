@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { ReactComponent as TodayIcon } from "../assets/today.svg";
 
 const FreeMode = ({ diaryId, loading, error, diary }) => {
-  console.log(diaryId);
-
   // useEffect(() => {
   //   if (!diaryId) {
   //     console.error("diaryId is undefined");

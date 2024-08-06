@@ -7,7 +7,6 @@ const getMonth = (date) => {
   return month;
 };
 const getDateFn = (date) => {
-  console.log(date);
   const day = new Date(date).getDate();
   return day;
 };

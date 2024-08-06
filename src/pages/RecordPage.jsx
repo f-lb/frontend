@@ -51,7 +51,6 @@ export default function RecordPage() {
   const handleSubmitDiary = async (e) => {
     e.preventDefault();
     const date = dayjs(`2024-${selectedMonth}-${selectedDay}`);
-    console.log("**date:", date.month() + 1, date.date(), date);
     setLoading(true);
     try {
       const { data } = await postDiary({
@@ -60,7 +59,6 @@ export default function RecordPage() {
         content,
       });
       setLoading(false);
-      console.log(data);
       window.localStorage.setItem(
         `${dayjs(data.createdDate).month() + 1}-${dayjs(
           data.createdDate
@@ -70,8 +68,6 @@ export default function RecordPage() {
       navigate(`/today-report?data=${JSON.stringify(data)}`);
     } catch (error) {
       alert("일기작성에 실패하였습니다. 에러:", error.message);
-      console.log(error);
-      console.log(error.message);
     }
   };
 
