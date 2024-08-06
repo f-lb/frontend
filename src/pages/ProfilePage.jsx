@@ -3,8 +3,18 @@ import ProfileImg from "../assets/profile_img.svg";
 import BasicImg from "../assets/basic.svg";
 import ArrowRight from "../assets/arrowRight.svg";
 import NewIcon from "../assets/new.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("name");
+
+    navigate("/");
+  };
+
   return (
     <Wrapper>
       <Nav>프로필</Nav>
@@ -46,7 +56,7 @@ export default function ProfilePage() {
         </MenuItem>
       </Menu>
       <Footer>
-        <FooterButton>로그아웃</FooterButton>|
+        <FooterButton onClick={handleLogout}>로그아웃</FooterButton>|
         <FooterButton>회원 탈퇴</FooterButton>
       </Footer>
     </Wrapper>
@@ -174,11 +184,11 @@ const Arrow = styled.img`
 
 const Footer = styled.div`
   color: var(--gray-400Neutral, #c5c5c5);
-  margin-top: 230px;
+  margin-top: 160px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 36px;
 `;
 
 const FooterButton = styled.button`
