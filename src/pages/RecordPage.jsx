@@ -59,12 +59,7 @@ export default function RecordPage() {
         content,
       });
       setLoading(false);
-      window.localStorage.setItem(
-        `${dayjs(data.createdDate).month() + 1}-${dayjs(
-          data.createdDate
-        ).date()}`,
-        JSON.stringify(data)
-      );
+
       navigate(`/today-report?data=${JSON.stringify(data)}`);
     } catch (error) {
       alert("일기작성에 실패하였습니다. 에러:", error.message);
