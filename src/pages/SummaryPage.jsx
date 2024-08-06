@@ -6,6 +6,7 @@ import FreeMode from "../components/FreeMode";
 import TemplateMode from "../components/TemplateMode";
 import { getDiaryById } from "../api/summary";
 import dayjs from "dayjs";
+import { getReports } from "../api/reports";
 
 const SummaryPage = ({ mode = "free" }) => {
   const { diaryId } = useParams();
@@ -43,20 +44,30 @@ const SummaryPage = ({ mode = "free" }) => {
   useEffect(() => {
     if (!diary) return;
 
-    const data = localStorage.getItem(
-      `${dayjs(diary.createdDate).month() + 1}-${dayjs(
-        diary.createdDate
-      ).date()}`
-    );
-    console.log("data, data:", data);
-    setReport(data);
+    // const data = localStorage.getItem(
+    //   `${dayjs(diary.createdDate).month() + 1}-${dayjs(
+    //     diary.createdDate
+    //   ).date()}`
+    // );
+
+    (async () => {
+      try {
+        const { data } = await getReports({ diaryId });
+        setReport(data);
+      } catch (error) {
+        console.error("Error fetching diary:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    })();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [diary]);
 
   const handleNavigateClick = () => {
     console.log("asdf");
-    navigate(`/today-report?data=${report}`);
+    navigate(`/today-report?data=${JSON.stringify(report)}`);
   };
 
   if (!diaryId) {
