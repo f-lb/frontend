@@ -188,6 +188,7 @@ const Footer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 36px;
+  padding-bottom: 50px;
 `;
 
 const FooterButton = styled.button`
