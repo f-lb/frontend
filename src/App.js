@@ -26,16 +26,13 @@ function App() {
             <Route path="/record" element={<RecordPage />} />
           </Route>
           <Route path="/summary/:diaryId" element={<SummaryPage />} />{" "}
-          {/* SummaryPage 경로 수정 */}
           <Route path="signin" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
           <Route path="signup-success" element={<SignupSuccess />} />
         </Routes>
-        {/* <Suspense fallback={<LoadingPage />}> */}
         <Routes>
           <Route path="/today-report" element={<TodayReportPage />} />
         </Routes>
-        {/* </Suspense> */}
       </BrowserRouter>
     </RootLayout>
   );

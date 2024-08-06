@@ -93,7 +93,7 @@ export default function WeeklyModeCalendarPage() {
                     오늘의 빈칸을 채워볼까요?
                   </h2>
                   <LinkToPostContainer>
-                    <LinkToPost to="record">
+                    <LinkToPost to="/record">
                       일기 작성하고 분석받기 {">"}
                     </LinkToPost>
                   </LinkToPostContainer>
